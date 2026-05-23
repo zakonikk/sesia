@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎯 12-дневный план подготовки • Основы Программирования</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;family=Space+Grotesk:wght@500;600&amp;display=swap');
+        
+        body { font-family: 'Inter', system_ui, sans-serif; }
+        .font-display { font-family: 'Space Grotesk', 'Inter', sans-serif; font-weight: 600; }
+
+        .day-card { transition: all 0.3s cubic-bezier(0.4, 0.0, 0.2, 1); }
+        .nav-active { border-bottom: 3px solid #3b82f6; color: #3b82f6; font-weight: 600; }
+        .resource-link { transition: all 0.2s ease; }
+        .resource-link:hover { transform: translateX(3px); color: #2563eb; }
+        .task-item { transition: all 0.2s ease; }
+        .task-item:hover { background-color: #f8fafc; }
+        .completed { opacity: 0.75; text-decoration: line-through; }
+    </style>
+</head>
+<body class="bg-slate-50">
+    <!-- Header -->
+    <header class="bg-white border-b sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-6 py-5">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center gap-x-4">
+                    <div class="w-11 h-11 bg-blue-600 rounded-2xl flex items-center justify-center">
+                        <i class="fa-solid fa-graduation-cap text-white text-2xl"></i>
+                    </div>
+                    <div>
+                        <h1 class="font-display text-3xl font-semibold tracking-tight">12-дневный план подготовки</h1>
+                        <p class="text-slate-500 text-sm">Основы Программирования • Python + C • 80% практика</p>
+                    </div>
+                </div>
+                <div class="flex items-center gap-x-3">
+                    <div class="bg-white border rounded-2xl px-4 py-1.5 text-sm flex items-center gap-x-2">
+                        <i class="fa-solid fa-user text-blue-500"></i>
+                        <span>Олексій • Киев</span>
+                    </div>
+                    <div class="bg-white border rounded-2xl px-4 py-1.5 text-sm font-medium">
+                        До экзамена: <span class="font-semibold text-blue-600">12 дней</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="max-w-7xl mx-auto px-6 pt-8 pb-12">
+        
+        <!-- Quick Stats -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+            <div class="bg-white border rounded-3xl p-5">
+                <div class="text-emerald-600 text-sm font-medium">ПРАКТИКА</div>
+                <div class="text-4xl font-semibold mt-1">80%</div>
+            </div>
+            <div class="bg-white border rounded-3xl p-5">
+                <div class="text-blue-600 text-sm font-medium">ТЕОРИЯ</div>
+                <div class="text-4xl font-semibold mt-1">20%</div>
+            </div>
+            <div class="bg-white border rounded-3xl p-5">
+                <div class="text-violet-600 text-sm font-medium">ДНЕЙ</div>
+                <div class="text-4xl font-semibold mt-1">12</div>
+            </div>
+            <div class="bg-white border rounded-3xl p-5 flex items-center">
+                <div>
+                    <div class="text-sm text-slate-500">Прогресс</div>
+                    <div class="flex items-baseline gap-x-1">
+                        <span id="progress-text" class="text-4xl font-semibold">0</span>
+                        <span class="text-slate-400">/12</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navigation -->
+        <div class="flex border-b mb-8 text-sm">
+            <button onclick="showSection('overview')" class="nav-tab px-5 py-3 font-medium text-slate-600 hover:text-slate-900 nav-active" id="nav-overview">Обзор</button>
+            <button onclick="showSection('daily')" class="nav-tab px-5 py-3 font-medium text-slate-600 hover:text-slate-900" id="nav-daily">План по дням</button>
+            <button onclick="showSection('resources')" class="nav-tab px-5 py-3 font-medium text-slate-600 hover:text-slate-900" id="nav-resources">Ресурсы</button>
+            <button onclick="showSection('tips')" class="nav-tab px-5 py-3 font-medium text-slate-600 hover:text-slate-900" id="nav-tips">Советы</button>
+        </div>
+
+        <!-- OVERVIEW -->
+        <div id="section-overview">
+            <div class="max-w-2xl">
+                <h2 class="text-4xl font-semibold tracking-tight mb-3">Как пользоваться этим планом</h2>
+                <p class="text-lg text-slate-600">Каждый день = теория (20-40 мин) + практика (решение задач). Отмечай выполненные дни — прогресс сохраняется.</p>
+            </div>
+            
+            <div class="mt-8 grid md:grid-cols-3 gap-5">
+                <div class="bg-white border rounded-3xl p-6">
+                    <div class="font-semibold mb-3 flex items-center gap-x-2"><i class="fa-solid fa-book text-blue-500"></i> Теория</div>
+                    <p class="text-sm text-slate-600">Смотри короткие видео или читай теорию 20-30 минут. Главное — понять концепцию.</p>
+                </div>
+                <div class="bg-white border rounded-3xl p-6">
+                    <div class="font-semibold mb-3 flex items-center gap-x-2"><i class="fa-solid fa-laptop-code text-emerald-500"></i> Практика</div>
+                    <p class="text-sm text-slate-600">Решай 8–15 задач в день. Пиши код сам. Тестируй крайние случаи.</p>
+                </div>
+                <div class="bg-white border rounded-3xl p-6">
+                    <div class="font-semibold mb-3 flex items-center gap-x-2"><i class="fa-solid fa-sync text-violet-500"></i> Повторение</div>
+                    <p class="text-sm text-slate-600">На следующий день быстро повтори вчерашнюю тему перед новой.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- DAILY PLAN -->
+        <div id="section-daily" class="hidden">
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-3xl font-semibold">План по дням + Задания</h2>
+                <button onclick="resetAllProgress()" class="text-sm px-4 py-2 text-red-500 hover:bg-red-50 rounded-2xl flex items-center gap-x-2">
+                    <i class="fa-solid fa-undo"></i> Сбросить прогресс
+                </button>
+            </div>
+
+            <div id="days-container" class="space-y-4"></div>
+        </div>
+
+        <!-- RESOURCES -->
+        <div id="section-resources" class="hidden">
+            <h2 class="text-3xl font-semibold mb-6">Лучшие ресурсы</h2>
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="bg-white border rounded-3xl p-7">
+                    <h3 class="font-semibold text-xl mb-4 flex items-center gap-x-2"><i class="fa-brands fa-python text-yellow-500"></i> Python</h3>
+                    <div class="space-y-4 text-sm">
+                        <div><span class="font-medium">Теория:</span> 
+                            <a href="https://pythonexercises.rozh2sch.org.ua/" class="resource-link text-blue-600">Практикум (укр)</a>, 
+                            <a href="https://docs.python.org/3/tutorial/" class="resource-link text-blue-600">Официальный туториал</a>
+                        </div>
+                        <div><span class="font-medium">Практика:</span> 
+                            <a href="https://pynative.com/python-exercises-with-solutions/" class="resource-link text-blue-600">PyNative</a>, 
+                            <a href="https://www.w3resource.com/python-exercises/" class="resource-link text-blue-600">W3Resource</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white border rounded-3xl p-7">
+                    <h3 class="font-semibold text-xl mb-4 flex items-center gap-x-2"><i class="fa-solid fa-c text-slate-700"></i> C</h3>
+                    <div class="space-y-4 text-sm">
+                        <div><span class="font-medium">Теория + Практика:</span> 
+                            <a href="https://learn-c.org/" class="resource-link text-blue-600">learn-c.org</a>, 
+                            <a href="https://pynative.com/c-programming-exercises/" class="resource-link text-blue-600">PyNative C</a>, 
+                            <a href="https://codeforwin.org/" class="resource-link text-blue-600">Codeforwin</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TIPS -->
+        <div id="section-tips" class="hidden">
+            <h2 class="text-3xl font-semibold mb-6">Полезные советы</h2>
+            <div class="grid md:grid-cols-2 gap-5 text-sm">
+                <div class="bg-white border rounded-3xl p-6">
+                    <h4 class="font-semibold mb-3">Как решать задачи</h4>
+                    <ul class="space-y-1.5 text-slate-600">
+                        <li>1. Прочитай условие 2 раза</li>
+                        <li>2. Напиши план на бумаге / комментариями</li>
+                        <li>3. Пиши код маленькими частями</li>
+                        <li>4. Тестируй на крайних случаях (0, 1, отрицательные)</li>
+                    </ul>
+                </div>
+                <div class="bg-white border rounded-3xl p-6">
+                    <h4 class="font-semibold mb-3">Python vs C</h4>
+                    <p class="text-slate-600">Python — проще для старта. C — учит работе с памятью. Решай одни и те же задачи на обеих языках — это лучший способ понять разницу.</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // Detailed days data with tasks and resources
+        const days = [
+            {
+                day: 1,
+                title: "Основы: Переменные, типы данных, ввод/вывод",
+                focus: "Python + C",
+                theoryTime: "30 мин",
+                theoryResources: [
+                    {name: "PyNative Python Basics", url: "https://pynative.com/python-exercises-with-solutions/"},
+                    {name: "learn-c.org — Variables", url: "https://learn-c.org/"}
+                ],
+                practiceTasks: [
+                    "Выведи 'Hello, World!' на Python и на C",
+                    "Попроси пользователя ввести имя и возраст, выведи приветствие",
+                    "Создай переменные разных типов и выведи их типы (type() в Python)",
+                    "Попроси два числа и выведи их сумму, разность, произведение",
+                    "Конвертер температуры (Цельсий → Фаренгейт)",
+                    "Вычисли площадь круга по радиусу",
+                    "Поменяй значения двух переменных (swap)"
+                ],
+                recommended: 7
+            },
+            {
+                day: 2,
+                title: "Операторы и приведение типов",
+                focus: "Python + C",
+                theoryTime: "25 мин",
+                theoryResources: [
+                    {name: "pythonexercises.rozh2sch.org.ua (раздел 1)", url: "https://pythonexercises.rozh2sch.org.ua/"},
+                    {name: "W3Schools C — Operators", url: "https://www.w3schools.com/c/c_operators.php"}
+                ],
+                practiceTasks: [
+                    "Вычисли среднее арифметическое трёх чисел",
+                    "Проверь, является ли число чётным",
+                    "Конвертер валют (гривна → доллар)",
+                    "Вычисли остаток от деления и целую часть",
+                    "Простой калькулятор скидки",
+                    "Проверь, делится ли число на 3 и на 5 одновременно"
+                ],
+                recommended: 6
+            },
+            {
+                day: 3,
+                title: "Условные конструкции (if, elif, else)",
+                focus: "Python + C",
+                theoryTime: "35 мин",
+                theoryResources: [
+                    {name: "PyNative — Conditional Statements", url: "https://pynative.com/python-if-else/"},
+                    {name: "learn-c.org — Conditions", url: "https://learn-c.org/"}
+                ],
+                practiceTasks: [
+                    "Определи, является ли число положительным, отрицательным или нулём",
+                    "Калькулятор с выбором операции (+ - * /)",
+                    "Проверь, является ли год високосным",
+                    "Определи наибольшее из трёх чисел",
+                    "Простая игра: угадай число (компьютер загадывает)",
+                    "Классификация треугольника по сторонам"
+                ],
+                recommended: 6
+            },
+            {
+                day: 4,
+                title: "Циклы (for, while)",
+                focus: "Python + C",
+                theoryTime: "40 мин",
+                theoryResources: [
+                    {name: "pythonexercises.rozh2sch.org.ua (циклы)", url: "https://pythonexercises.rozh2sch.org.ua/"},
+                    {name: "W3Schools C — Loops", url: "https://www.w3schools.com/c/c_loops.php"}
+                ],
+                practiceTasks: [
+                    "Выведи числа от 1 до 100",
+                    "Выведи все чётные числа от 1 до 50",
+                    "Посчитай сумму чисел от 1 до n",
+                    "Таблица умножения (от 1 до 10)",
+                    "Факториал числа",
+                    "Числа Фибоначчи (первые 15)",
+                    "Проверь, является ли число простым"
+                ],
+                recommended: 7
+            },
+            {
+                day: 5,
+                title: "Функции",
+                focus: "Python + C",
+                theoryTime: "35 мин",
+                theoryResources: [
+                    {name: "PyNative — Python Functions", url: "https://pynative.com/python-functions/"},
+                    {name: "Programiz C — Functions", url: "https://www.programiz.com/c-programming/c-functions"}
+                ],
+                practiceTasks: [
+                    "Функция, которая возвращает максимум из двух чисел",
+                    "Функция приветствия с параметром имени",
+                    "Функция, которая проверяет, является ли число чётным",
+                    "Функция для вычисления факториала",
+                    "Функция, которая возвращает сумму цифр числа",
+                    "Функция, которая переворачивает строку"
+                ],
+                recommended: 6
+            },
+            {
+                day: 6,
+                title: "Рекурсия",
+                focus: "Python + C",
+                theoryTime: "30 мин",
+                theoryResources: [
+                    {name: "Real Python — Recursion", url: "https://realpython.com/python-recursion/"},
+                    {name: "GeeksforGeeks — Recursion in C", url: "https://www.geeksforgeeks.org/c/recursion-in-c/"}
+                ],
+                practiceTasks: [
+                    "Рекурсивный факториал",
+                    "Рекурсивные числа Фибоначчи",
+                    "Рекурсивная сумма цифр числа",
+                    "Рекурсивный подсчёт количества цифр в числе",
+                    "Рекурсивный поиск максимума в списке/массиве"
+                ],
+                recommended: 5
+            },
+            {
+                day: 7,
+                title: "Списки / Массивы",
+                focus: "Python + C",
+                theoryTime: "40 мин",
+                theoryResources: [
+                    {name: "PyNative — Python Lists", url: "https://pynative.com/python-lists/"},
+                    {name: "W3Schools C — Arrays", url: "https://www.w3schools.com/c/c_arrays.php"}
+                ],
+                practiceTasks: [
+                    "Создай список из 10 случайных чисел и найди максимум/минимум",
+                    "Посчитай сумму всех элементов списка",
+                    "Разверни список без использования reverse()",
+                    "Найди количество чётных и нечётных чисел в списке",
+                    "Удалить все дубликаты из списка",
+                    "Сортировка пузырьком (Bubble Sort)"
+                ],
+                recommended: 6
+            },
+            {
+                day: 8,
+                title: "Словари, множества, строки (Python) + Strings (C)",
+                focus: "Python + C",
+                theoryTime: "35 мин",
+                theoryResources: [
+                    {name: "PyNative — Dictionaries & Sets", url: "https://pynative.com/python-dictionaries/"},
+                    {name: "Programiz C — Strings", url: "https://www.programiz.com/c-programming/c-strings"}
+                ],
+                practiceTasks: [
+                    "Подсчёт частоты каждого символа в строке",
+                    "Проверь, является ли строка палиндромом",
+                    "Найди самое длинное слово в предложении",
+                    "Создай словарь: имя → возраст (минимум 5 записей)",
+                    "Объедини два словаря",
+                    "Подсчёт количества слов в тексте"
+                ],
+                recommended: 6
+            },
+            {
+                day: 9,
+                title: "Pointers в C (самый важный день!)",
+                focus: "C",
+                theoryTime: "50 мин",
+                theoryResources: [
+                    {name: "PyNative — C Pointers Exercises", url: "https://pynative.com/c-programming-pointers-exercises/"},
+                    {name: "learn-c.org — Pointers", url: "https://learn-c.org/"}
+                ],
+                practiceTasks: [
+                    "Поменяй значения двух переменных через указатели (swap)",
+                    "Выведи адрес и значение переменной",
+                    "Пройди по массиву с помощью указателя",
+                    "Напиши функцию, которая меняет значение через указатель",
+                    "Динамическое выделение памяти под массив (malloc)",
+                    "Копирование строки с помощью указателей"
+                ],
+                recommended: 6
+            },
+            {
+                day: 10,
+                title: "Работа с файлами",
+                focus: "Python + C",
+                theoryTime: "30 мин",
+                theoryResources: [
+                    {name: "PyNative — File Handling", url: "https://pynative.com/python-file-handling/"},
+                    {name: "W3Schools C — Files", url: "https://www.w3schools.com/c/c_files.php"}
+                ],
+                practiceTasks: [
+                    "Запиши 10 чисел в файл",
+                    "Прочитай файл и посчитай сумму чисел",
+                    "Подсчёт количества строк в файле",
+                    "Запиши в файл список студентов и их оценки",
+                    "Прочитай CSV-файл (простой) и выведи данные",
+                    "Создай простой 'дневник' — добавляй записи и сохраняй"
+                ],
+                recommended: 6
+            },
+            {
+                day: 11,
+                title: "OOP Basics + Алгоритмы",
+                focus: "Python + C",
+                theoryTime: "40 мин",
+                theoryResources: [
+                    {name: "PyNative — OOP", url: "https://pynative.com/python-object-oriented-programming/"},
+                    {name: "GeeksforGeeks — Struct in C", url: "https://www.geeksforgeeks.org/c/structures-in-c/"}
+                ],
+                practiceTasks: [
+                    "Создай класс Student с полями имя, возраст, оценки",
+                    "Добавь метод, который возвращает средний балл",
+                    "Реализуй Bubble Sort",
+                    "Реализуй Linear Search",
+                    "Создай структуру в C (struct Student)"
+                ],
+                recommended: 5
+            },
+            {
+                day: 12,
+                title: "Повторение + Симуляция экзамена",
+                focus: "Python + C",
+                theoryTime: "60 мин",
+                theoryResources: [],
+                practiceTasks: [
+                    "Решить 3 задачи разной сложности на Python",
+                    "Решить 3 задачи на C (включая указатели)",
+                    "Написать FizzBuzz на обоих языках",
+                    "Написать простой калькулятор с циклом",
+                    "Повторить все слабые темы"
+                ],
+                recommended: 5
+            }
+        ];
+
+        function renderDays() {
+            const container = document.getElementById('days-container');
+            container.innerHTML = '';
+
+            days.forEach(d => {
+                const completed = localStorage.getItem(`day-${d.day}`) === 'true';
+                
+                let html = `
+                <div class="day-card bg-white border rounded-3xl overflow-hidden ${completed ? 'opacity-80' : ''}" id="day-card-${d.day}">
+                    <div onclick="toggleDay(${d.day})" class="px-6 py-5 flex items-center justify-between cursor-pointer border-b">
+                        <div class="flex items-center gap-x-4">
+                            <div class="w-9 h-9 rounded-2xl flex-shrink-0 flex items-center justify-center text-sm font-semibold 
+                                ${completed ? 'bg-emerald-100 text-emerald-600' : 'bg-blue-100 text-blue-600'}">
+                                ${d.day}
+                            </div>
+                            <div>
+                                <div class="font-semibold">${d.title}</div>
+                                <div class="text-xs text-slate-500">${d.focus} • ${d.theoryTime}</div>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center gap-x-3">
+                            <div onclick="event.stopImmediatePropagation(); toggleComplete(${d.day}, this)" 
+                                 class="w-8 h-8 flex items-center justify-center rounded-2xl border text-sm transition-all
+                                 ${completed ? 'bg-emerald-500 border-emerald-500 text-white' : 'border-slate-300 hover:bg-slate-100'}">
+                                <i class="fa-solid fa-check"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="hidden px-6 py-6 bg-slate-50" id="day-content-${d.day}">
+                        <!-- Theory -->
+                        <div class="mb-5">
+                            <div class="uppercase tracking-widest text-xs font-medium text-slate-400 mb-2">ГДЕ УЧИТЬ ТЕОРИЮ</div>
+                            ${d.theoryResources.length > 0 ? 
+                                d.theoryResources.map(r => `
+                                    <a href="${r.url}" target="_blank" class="resource-link block text-sm py-0.5 text-blue-600 hover:underline">
+                                        → ${r.name}
+                                    </a>
+                                `).join('') : 
+                                '<span class="text-sm text-slate-500">Повторение + подготовка к экзамену</span>'
+                            }
+                        </div>
+
+                        <!-- Practice -->
+                        <div>
+                            <div class="flex items-center justify-between mb-2">
+                                <div class="uppercase tracking-widest text-xs font-medium text-slate-400">ЗАДАНИЯ ДЛЯ ПРАКТИКИ</div>
+                                <div class="text-xs px-3 py-0.5 bg-white border rounded-full">${d.recommended} задач</div>
+                            </div>
+                            
+                            <div class="space-y-1 text-sm">
+                                ${d.practiceTasks.map((task, i) => `
+                                    <div class="task-item flex items-start gap-x-3 px-3 py-2 rounded-2xl hover:bg-white border border-transparent hover:border-slate-200">
+                                        <div class="mt-0.5 text-emerald-500"><i class="fa-solid fa-check-circle"></i></div>
+                                        <div>${task}</div>
+                                    </div>
+                                `).join('')}
+                            </div>
+                        </div>
+
+                        <div class="mt-5 pt-4 border-t flex justify-between items-center text-xs">
+                            <button onclick="markDayDone(${d.day}); event.stopImmediatePropagation()" 
+                                    class="px-4 py-2 bg-emerald-600 hover:bg-emerald-700 transition text-white text-xs font-medium rounded-2xl flex items-center gap-x-2">
+                                <i class="fa-solid fa-check-double"></i>
+                                <span>Отметить день выполненным</span>
+                            </button>
+                            <span class="text-slate-400">Рекомендуется: 2–3.5 часа</span>
+                        </div>
+                    </div>
+                </div>`;
+                
+                container.innerHTML += html;
+            });
+            
+            updateProgress();
+        }
+
+        function toggleDay(dayNum) {
+            const content = document.getElementById(`day-content-${dayNum}`);
+            if (content) content.classList.toggle('hidden');
+        }
+
+        function toggleComplete(dayNum, element) {
+            event.stopImmediatePropagation();
+            const isDone = localStorage.getItem(`day-${dayNum}`) === 'true';
+            localStorage.setItem(`day-${dayNum}`, !isDone);
+            
+            // re-render to update styles
+            const container = document.getElementById('days-container');
+            container.innerHTML = '';
+            renderDays();
+        }
+
+        function markDayDone(dayNum) {
+            localStorage.setItem(`day-${dayNum}`, 'true');
+            const container = document.getElementById('days-container');
+            container.innerHTML = '';
+            renderDays();
+        }
+
+        function updateProgress() {
+            let done = 0;
+            for (let i = 1; i <= 12; i++) {
+                if (localStorage.getItem(`day-${i}`) === 'true') done++;
+            }
+            const el = document.getElementById('progress-text');
+            if (el) el.innerText = done;
+        }
+
+        function resetAllProgress() {
+            if (confirm('Сбросить весь прогресс?')) {
+                for (let i = 1; i <= 12; i++) localStorage.removeItem(`day-${i}`);
+                const container = document.getElementById('days-container');
+                container.innerHTML = '';
+                renderDays();
+            }
+        }
+
+        function showSection(section) {
+            ['overview', 'daily', 'resources', 'tips'].forEach(s => {
+                document.getElementById('section-' + s).classList.add('hidden');
+            });
+            document.getElementById('section-' + section).classList.remove('hidden');
+            
+            document.querySelectorAll('.nav-tab').forEach(el => el.classList.remove('nav-active'));
+            document.getElementById('nav-' + section).classList.add('nav-active');
+
+            if (section === 'daily') {
+                const container = document.getElementById('days-container');
+                if (container.children.length === 0) renderDays();
+            }
+        }
+
+        function init() {
+            // Show overview first
+            document.getElementById('section-overview').classList.remove('hidden');
+            document.getElementById('nav-overview').classList.add('nav-active');
+            
+            // Render days in background
+            setTimeout(() => {
+                const container = document.getElementById('days-container');
+                if (container) renderDays();
+            }, 300);
+        }
+
+        window.onload = init;
+    </script>
+</body>
+</html>
