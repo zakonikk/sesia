@@ -1,551 +1,1289 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🎯 12-дневный план подготовки • Основы Программирования</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;family=Space+Grotesk:wght@500;600&amp;display=swap');
-        
-        body { font-family: 'Inter', system_ui, sans-serif; }
-        .font-display { font-family: 'Space Grotesk', 'Inter', sans-serif; font-weight: 600; }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🎯 12-пунктовый план подготовки • Основы Программирования</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;family=Space+Grotesk:wght@500;600&amp;display=swap');
+body { font-family: 'Inter', system_ui, sans-serif; }
+.font-display { font-family: 'Space Grotesk', 'Inter', sans-serif; font-weight: 600; }
+.day-card { transition: all 0.3s cubic-bezier(0.4, 0.0, 0.2, 1); }
+.nav-active { border-bottom: 3px solid #3b82f6; color: #3b82f6; font-weight: 600; }
+.resource-link { transition: all 0.2s ease; }
+.resource-link:hover { transform: translateX(3px); color: #2563eb; }
+.task-item { transition: all 0.2s ease; }
+.task-item:hover { background-color: #f8fafc; }
+.completed { opacity: 0.75; text-decoration: line-through; }
+.difficulty-1 { color: #22c55e; }
+.difficulty-2 { color: #eab308; }
+.difficulty-3 { color: #ef4444; }
 
-        .day-card { transition: all 0.3s cubic-bezier(0.4, 0.0, 0.2, 1); }
-        .nav-active { border-bottom: 3px solid #3b82f6; color: #3b82f6; font-weight: 600; }
-        .resource-link { transition: all 0.2s ease; }
-        .resource-link:hover { transform: translateX(3px); color: #2563eb; }
-        .task-item { transition: all 0.2s ease; }
-        .task-item:hover { background-color: #f8fafc; }
-        .completed { opacity: 0.75; text-decoration: line-through; }
-    </style>
+/* ==================== ТЁМНАЯ ТЕМА ==================== */
+html.dark {
+    color-scheme: dark;
+}
+html.dark body {
+    background-color: #0f172a;
+    color: #e2e8f0;
+}
+html.dark header {
+    background-color: #1e293b;
+    border-color: #334155;
+}
+html.dark .bg-white {
+    background-color: #1e293b;
+}
+html.dark .bg-slate-50 {
+    background-color: #0f172a;
+}
+html.dark .border {
+    border-color: #334155;
+}
+html.dark .text-slate-600,
+html.dark .text-slate-500 {
+    color: #94a3b8;
+}
+html.dark .day-card {
+    background-color: #1e293b;
+    border-color: #334155;
+}
+html.dark .task-item:hover {
+    background-color: #334155;
+}
+html.dark pre,
+html.dark code {
+    background-color: #1e293b;
+}
+html.dark .bg-slate-900 {
+    background-color: #0f172a;
+}
+html.dark .bg-slate-900.text-slate-200 {
+    background-color: #1e293b;
+    color: #e2e8f0;
+}
+</style>
 </head>
 <body class="bg-slate-50">
-    <!-- Header -->
-    <header class="bg-white border-b sticky top-0 z-50">
-        <div class="max-w-7xl mx-auto px-6 py-5">
-            <div class="flex items-center justify-between">
-                <div class="flex items-center gap-x-4">
-                    <div class="w-11 h-11 bg-blue-600 rounded-2xl flex items-center justify-center">
-                        <i class="fa-solid fa-graduation-cap text-white text-2xl"></i>
-                    </div>
-                    <div>
-                        <h1 class="font-display text-3xl font-semibold tracking-tight">12-дневный план подготовки</h1>
-                        <p class="text-slate-500 text-sm">Основы Программирования • Python + C • 80% практика</p>
-                    </div>
-                </div>
-                <div class="flex items-center gap-x-3">
-                    <div class="bg-white border rounded-2xl px-4 py-1.5 text-sm flex items-center gap-x-2">
-                        <i class="fa-solid fa-user text-blue-500"></i>
-                        <span>Олексій • Киев</span>
-                    </div>
-                    <div class="bg-white border rounded-2xl px-4 py-1.5 text-sm font-medium">
-                        До экзамена: <span class="font-semibold text-blue-600">12 дней</span>
-                    </div>
-                </div>
+<!-- Header -->
+<header class="bg-white border-b sticky top-0 z-50">
+<div class="max-w-7xl mx-auto px-6 py-5">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-x-4">
+<div class="w-11 h-11 bg-blue-600 rounded-2xl flex items-center justify-center">
+<i class="fa-solid fa-graduation-cap text-white text-2xl"></i>
+</div>
+<div>
+<h1 class="font-display text-3xl font-semibold tracking-tight">12-пунктовый план подготовки</h1>
+<p class="text-slate-500 text-sm">Основы Программирования • Python + C • 80% практика</p>
+</div>
+</div>
+
+<div class="flex items-center gap-x-3">
+<!-- Theme Toggle -->
+<button onclick="toggleTheme()" 
+        class="w-10 h-10 flex items-center justify-center rounded-2xl border hover:bg-slate-100 transition-colors"
+        title="Сменить тему">
+    <i id="theme-icon" class="fa-solid fa-moon text-slate-600"></i>
+</button>
+
+<!-- Python Playground Button -->
+<button onclick="openPythonPlayground()"
+        class="flex items-center gap-x-2 bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-2 rounded-2xl text-sm font-medium transition-colors">
+    <i class="fa-brands fa-python"></i>
+    <span class="hidden sm:inline">Песочница Python</span>
+</button>
+
+<div onclick="editUserInfo()" class="bg-white border rounded-2xl px-4 py-1.5 text-sm flex items-center gap-x-2 cursor-pointer hover:bg-slate-50">
+<i class="fa-solid fa-user text-blue-500"></i>
+<span id="user-info">Гость • Киев</span>
+</div>
+
+<div class="bg-white border rounded-2xl px-4 py-1.5 text-sm font-medium">
+До экзамена: <span id="countdown" class="font-semibold text-blue-600">--</span>
+</div>
+</div>
+</div>
+</div>
+</header>
+
+<div class="max-w-7xl mx-auto px-6 pt-8 pb-12">
+
+<!-- Quick Stats -->
+<div class="grid grid-cols-2 md:grid-cols-5 gap-4 mb-8">
+<div class="bg-white border rounded-3xl p-5">
+<div class="text-emerald-600 text-sm font-medium">ПРАКТИКА</div>
+<div class="text-4xl font-semibold mt-1">80%</div>
+</div>
+<div class="bg-white border rounded-3xl p-5">
+<div class="text-blue-600 text-sm font-medium">ТЕОРИЯ</div>
+<div class="text-4xl font-semibold mt-1">20%</div>
+</div>
+<div class="bg-white border rounded-3xl p-5">
+<div class="text-violet-600 text-sm font-medium">ДНЕЙ</div>
+<div class="text-4xl font-semibold mt-1">12</div>
+</div>
+<div class="bg-white border rounded-3xl p-5 flex items-center">
+<div>
+<div class="text-sm text-slate-500">Прогресс</div>
+<div class="flex items-baseline gap-x-1">
+<span id="progress-text" class="text-4xl font-semibold">0</span>
+<span class="text-slate-400">/12</span>
+</div>
+</div>
+</div>
+<div class="bg-white border rounded-3xl p-5 flex items-center gap-x-3">
+<div>
+<div class="text-sm text-orange-500 font-medium">STREAK</div>
+<div class="flex items-baseline gap-x-1">
+<span id="streak-text" class="text-4xl font-semibold text-orange-600">0</span>
+<span class="text-slate-400 text-sm">дней</span>
+</div>
+</div>
+<div class="text-3xl">🔥</div>
+</div>
+</div>
+
+<!-- Navigation -->
+<div class="flex border-b mb-8 text-sm overflow-x-auto">
+<button onclick="showSection('overview')" class="nav-tab px-5 py-3 font-medium text-slate-600 hover:text-slate-900 nav-active whitespace-nowrap" id="nav-overview">Обзор</button>
+<button onclick="showSection('daily')" class="nav-tab px-5 py-3 font-medium text-slate-600 hover:text-slate-900 whitespace-nowrap" id="nav-daily">План по пунктам</button>
+<button onclick="showSection('projects')" class="nav-tab px-5 py-3 font-medium text-slate-600 hover:text-slate-900 whitespace-nowrap" id="nav-projects">Проекты</button>
+<button onclick="showSection('review')" class="nav-tab px-5 py-3 font-medium text-slate-600 hover:text-slate-900 whitespace-nowrap" id="nav-review">Что повторить</button>
+<button onclick="showSection('resources')" class="nav-tab px-5 py-3 font-medium text-slate-600 hover:text-slate-900 whitespace-nowrap" id="nav-resources">Ресурсы</button>
+<button onclick="showSection('tips')" class="nav-tab px-5 py-3 font-medium text-slate-600 hover:text-slate-900 whitespace-nowrap" id="nav-tips">Советы</button>
+</div>
+
+<!-- OVERVIEW -->
+<div id="section-overview">
+<div class="max-w-2xl">
+<h2 class="text-4xl font-semibold tracking-tight mb-3">Как пользоваться этим планом</h2>
+<p class="text-lg text-slate-600">Каждый день = теория (20-40 мин) + практика. Отмечай выполненные задачи. Оценивай своё понимание темы — это поможет системе рекомендовать, что повторить.</p>
+</div>
+
+<div class="mt-8 grid md:grid-cols-3 gap-5">
+<div class="bg-white border rounded-3xl p-6">
+<div class="font-semibold mb-3 flex items-center gap-x-2"><i class="fa-solid fa-book text-blue-500"></i> Теория</div>
+<p class="text-sm text-slate-600">Смотри короткие видео или читай теорию 20-30 минут.</p>
+</div>
+<div class="bg-white border rounded-3xl p-6">
+<div class="font-semibold mb-3 flex items-center gap-x-2"><i class="fa-solid fa-laptop-code text-emerald-500"></i> Практика</div>
+<p class="text-sm text-slate-600">Решай задачи. Отмечай их галочкой. Используй Песочницу Python.</p>
+</div>
+<div class="bg-white border rounded-3xl p-6">
+<div class="font-semibold mb-3 flex items-center gap-x-2"><i class="fa-solid fa-sync text-violet-500"></i> Повторение</div>
+<p class="text-sm text-slate-600">Оценивай понимание темы. Система покажет, что нужно повторить.</p>
+</div>
+</div>
+</div>
+
+<!-- DAILY PLAN -->
+<div id="section-daily" class="hidden">
+<div class="flex justify-between items-center mb-6">
+<h2 class="text-3xl font-semibold">План по пунктам + Задания</h2>
+<button onclick="resetAllProgress()" class="text-sm px-4 py-2 text-red-500 hover:bg-red-50 rounded-2xl flex items-center gap-x-2">
+<i class="fa-solid fa-undo"></i> Сбросить прогресс
+</button>
+</div>
+<div id="days-container" class="space-y-4"></div>
+</div>
+
+<!-- PROJECTS SECTION -->
+<div id="section-projects" class="hidden">
+<h2 class="text-3xl font-semibold mb-2">Мини-проекты</h2>
+<p class="text-slate-600 mb-6">Применяй знания из нескольких дней на практике. Нажимай «Открыть в песочнице», чтобы сразу начать кодить.</p>
+
+<div class="grid md:grid-cols-2 gap-6">
+<!-- Project 1 -->
+<div class="bg-white border rounded-3xl p-6">
+<div class="flex items-center gap-x-3 mb-4">
+<div class="w-10 h-10 bg-emerald-100 rounded-2xl flex items-center justify-center">
+<i class="fa-solid fa-calculator text-emerald-600"></i>
+</div>
+<div>
+<h3 class="font-semibold text-lg">Умный калькулятор с историей</h3>
+<p class="text-xs text-slate-500">Дни 2, 3, 5, 10</p>
+</div>
+</div>
+<p class="text-sm text-slate-600 mb-4">Калькулятор, который помнит предыдущие вычисления и может сохранять историю в файл.</p>
+<div class="flex gap-2">
+<button onclick="openProjectInPlayground(0)" class="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white py-2 rounded-2xl text-sm font-medium">Открыть в песочнице</button>
+</div>
+</div>
+
+<!-- Project 2 -->
+<div class="bg-white border rounded-3xl p-6">
+<div class="flex items-center gap-x-3 mb-4">
+<div class="w-10 h-10 bg-violet-100 rounded-2xl flex items-center justify-center">
+<i class="fa-solid fa-gamepad text-violet-600"></i>
+</div>
+<div>
+<h3 class="font-semibold text-lg">Игра «Угадай число»</h3>
+<p class="text-xs text-slate-500">Дни 3, 5, 7</p>
+</div>
+</div>
+<p class="text-sm text-slate-600 mb-4">Игра с ограниченным количеством попыток, подсказками и счётом побед.</p>
+<div class="flex gap-2">
+<button onclick="openProjectInPlayground(1)" class="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white py-2 rounded-2xl text-sm font-medium">Открыть в песочнице</button>
+</div>
+</div>
+
+<!-- Project 3 -->
+<div class="bg-white border rounded-3xl p-6">
+<div class="flex items-center gap-x-3 mb-4">
+<div class="w-10 h-10 bg-amber-100 rounded-2xl flex items-center justify-center">
+<i class="fa-solid fa-chart-bar text-amber-600"></i>
+</div>
+<div>
+<h3 class="font-semibold text-lg">Анализатор текста</h3>
+<p class="text-xs text-slate-500">Дни 8, 5</p>
+</div>
+</div>
+<p class="text-sm text-slate-600 mb-4">Анализирует текст: количество слов, частота символов, проверка на палиндром.</p>
+<div class="flex gap-2">
+<button onclick="openProjectInPlayground(2)" class="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white py-2 rounded-2xl text-sm font-medium">Открыть в песочнице</button>
+</div>
+</div>
+
+<!-- Project 4 -->
+<div class="bg-white border rounded-3xl p-6">
+<div class="flex items-center gap-x-3 mb-4">
+<div class="w-10 h-10 bg-blue-100 rounded-2xl flex items-center justify-center">
+<i class="fa-solid fa-users text-blue-600"></i>
+</div>
+<div>
+<h3 class="font-semibold text-lg">Менеджер студентов (OOP)</h3>
+<p class="text-xs text-slate-500">Дни 11, 10, 5</p>
+</div>
+</div>
+<p class="text-sm text-slate-600 mb-4">Класс Student + список студентов + сохранение в файл и поиск.</p>
+<div class="flex gap-2">
+<button onclick="openProjectInPlayground(3)" class="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white py-2 rounded-2xl text-sm font-medium">Открыть в песочнице</button>
+</div>
+</div>
+</div>
+</div>
+
+<!-- REVIEW SECTION -->
+<div id="section-review" class="hidden">
+<h2 class="text-3xl font-semibold mb-2">Что нужно повторить</h2>
+<p class="text-slate-600 mb-6">Здесь показываются дни с низкой самооценкой или незавершёнными задачами.</p>
+
+<div id="review-container" class="space-y-3">
+<!-- Populated by JS -->
+</div>
+
+<div class="mt-8 text-sm text-slate-500">
+Совет: Оценивай понимание темы после каждого дня. Это помогает системе точнее рекомендовать повторение.
+</div>
+</div>
+
+<!-- RESOURCES -->
+<div id="section-resources" class="hidden">
+<h2 class="text-3xl font-semibold mb-6">Лучшие ресурсы</h2>
+<div class="grid md:grid-cols-2 gap-6">
+<div class="bg-white border rounded-3xl p-7">
+<h3 class="font-semibold text-xl mb-4 flex items-center gap-x-2"><i class="fa-brands fa-python text-yellow-500"></i> Python</h3>
+<div class="space-y-4 text-sm">
+<div><span class="font-medium">Теория:</span>
+<a href="https://pythonexercises.rozh2sch.org.ua/" target="_blank" class="resource-link text-blue-600">Практикум (укр)</a>,
+<a href="https://docs.python.org/3/tutorial/" target="_blank" class="resource-link text-blue-600">Официальный туториал</a>,
+<a href="https://mate.academy/study/python?module=python-basics" target="_blank" class="resource-link text-blue-600">MateAcademy</a>
+</div>
+<div><span class="font-medium">Практика:</span>
+<a href="https://pynative.com/python-exercises-with-solutions/" target="_blank" class="resource-link text-blue-600">PyNative</a>,
+<a href="https://www.w3resource.com/python-exercises/" target="_blank" class="resource-link text-blue-600">W3Resource</a>
+</div>
+</div>
+</div>
+<div class="bg-white border rounded-3xl p-7">
+<h3 class="font-semibold text-xl mb-4 flex items-center gap-x-2"><i class="fa-solid fa-c text-slate-700"></i> C</h3>
+<div class="space-y-4 text-sm">
+<div><span class="font-medium">Теория + Практика:</span>
+<a href="https://learn-c.org/" class="resource-link text-blue-600">learn-c.org</a>,
+<a href="https://pynative.com/c-programming-exercises/" class="resource-link text-blue-600">PyNative C</a>,
+<a href="https://codeforwin.org/" class="resource-link text-blue-600">Codeforwin</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- TIPS -->
+<div id="section-tips" class="hidden">
+<h2 class="text-3xl font-semibold mb-6">Полезные советы</h2>
+<div class="grid md:grid-cols-2 gap-5 text-sm">
+<div class="bg-white border rounded-3xl p-6">
+<h4 class="font-semibold mb-3">Как решать задачи</h4>
+<ul class="space-y-1.5 text-slate-600">
+<li>1. Прочитай условие 2 раза</li>
+<li>2. Напиши план на бумаге / комментариями</li>
+<li>3. Пиши код маленькими частями</li>
+<li>4. Тестируй на крайних случаях</li>
+</ul>
+</div>
+<div class="bg-white border rounded-3xl p-6">
+<h4 class="font-semibold mb-3 flex items-center gap-x-2"><i class="fa-brands fa-openai text-slate-700"></i> ИИ/AI</h4>
+<p class="text-slate-600">Проси практические задания у ИИ. Если думаешь больше 15 минут — попроси подсказку. Используй Песочницу для быстрой проверки идей.</p>
+</div>
+</div>
+</div>
+
+</div>
+
+<!-- Python Playground Modal -->
+<div id="playground-modal" onclick="if (event.target.id === 'playground-modal') closePlayground()" class="hidden fixed inset-0 bg-black/60 z-[100] flex items-center justify-center p-4">
+<div onclick="event.stopImmediatePropagation()" class="bg-white rounded-3xl w-full max-w-4xl max-h-[90vh] flex flex-col shadow-2xl">
+    
+    <!-- Modal Header -->
+    <div class="flex items-center justify-between px-6 py-4 border-b">
+        <div class="flex items-center gap-x-3">
+            <div class="w-9 h-9 bg-emerald-600 rounded-2xl flex items-center justify-center">
+                <i class="fa-brands fa-python text-white text-xl"></i>
+            </div>
+            <div>
+                <h3 class="font-semibold text-xl">Python Песочница</h3>
+                <p class="text-xs text-slate-500">Pyodide • выполняется в браузере</p>
             </div>
         </div>
-    </header>
-
-    <div class="max-w-7xl mx-auto px-6 pt-8 pb-12">
-        
-        <!-- Quick Stats -->
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
-            <div class="bg-white border rounded-3xl p-5">
-                <div class="text-emerald-600 text-sm font-medium">ПРАКТИКА</div>
-                <div class="text-4xl font-semibold mt-1">80%</div>
-            </div>
-            <div class="bg-white border rounded-3xl p-5">
-                <div class="text-blue-600 text-sm font-medium">ТЕОРИЯ</div>
-                <div class="text-4xl font-semibold mt-1">20%</div>
-            </div>
-            <div class="bg-white border rounded-3xl p-5">
-                <div class="text-violet-600 text-sm font-medium">ДНЕЙ</div>
-                <div class="text-4xl font-semibold mt-1">12</div>
-            </div>
-            <div class="bg-white border rounded-3xl p-5 flex items-center">
-                <div>
-                    <div class="text-sm text-slate-500">Прогресс</div>
-                    <div class="flex items-baseline gap-x-1">
-                        <span id="progress-text" class="text-4xl font-semibold">0</span>
-                        <span class="text-slate-400">/12</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Navigation -->
-        <div class="flex border-b mb-8 text-sm">
-            <button onclick="showSection('overview')" class="nav-tab px-5 py-3 font-medium text-slate-600 hover:text-slate-900 nav-active" id="nav-overview">Обзор</button>
-            <button onclick="showSection('daily')" class="nav-tab px-5 py-3 font-medium text-slate-600 hover:text-slate-900" id="nav-daily">План по дням</button>
-            <button onclick="showSection('resources')" class="nav-tab px-5 py-3 font-medium text-slate-600 hover:text-slate-900" id="nav-resources">Ресурсы</button>
-            <button onclick="showSection('tips')" class="nav-tab px-5 py-3 font-medium text-slate-600 hover:text-slate-900" id="nav-tips">Советы</button>
-        </div>
-
-        <!-- OVERVIEW -->
-        <div id="section-overview">
-            <div class="max-w-2xl">
-                <h2 class="text-4xl font-semibold tracking-tight mb-3">Как пользоваться этим планом</h2>
-                <p class="text-lg text-slate-600">Каждый день = теория (20-40 мин) + практика (решение задач). Отмечай выполненные дни — прогресс сохраняется.</p>
-            </div>
-            
-            <div class="mt-8 grid md:grid-cols-3 gap-5">
-                <div class="bg-white border rounded-3xl p-6">
-                    <div class="font-semibold mb-3 flex items-center gap-x-2"><i class="fa-solid fa-book text-blue-500"></i> Теория</div>
-                    <p class="text-sm text-slate-600">Смотри короткие видео или читай теорию 20-30 минут. Главное — понять концепцию.</p>
-                </div>
-                <div class="bg-white border rounded-3xl p-6">
-                    <div class="font-semibold mb-3 flex items-center gap-x-2"><i class="fa-solid fa-laptop-code text-emerald-500"></i> Практика</div>
-                    <p class="text-sm text-slate-600">Решай 8–15 задач в день. Пиши код сам. Тестируй крайние случаи.</p>
-                </div>
-                <div class="bg-white border rounded-3xl p-6">
-                    <div class="font-semibold mb-3 flex items-center gap-x-2"><i class="fa-solid fa-sync text-violet-500"></i> Повторение</div>
-                    <p class="text-sm text-slate-600">На следующий день быстро повтори вчерашнюю тему перед новой.</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- DAILY PLAN -->
-        <div id="section-daily" class="hidden">
-            <div class="flex justify-between items-center mb-6">
-                <h2 class="text-3xl font-semibold">План по дням + Задания</h2>
-                <button onclick="resetAllProgress()" class="text-sm px-4 py-2 text-red-500 hover:bg-red-50 rounded-2xl flex items-center gap-x-2">
-                    <i class="fa-solid fa-undo"></i> Сбросить прогресс
-                </button>
-            </div>
-
-            <div id="days-container" class="space-y-4"></div>
-        </div>
-
-        <!-- RESOURCES -->
-        <div id="section-resources" class="hidden">
-            <h2 class="text-3xl font-semibold mb-6">Лучшие ресурсы</h2>
-            <div class="grid md:grid-cols-2 gap-6">
-                <div class="bg-white border rounded-3xl p-7">
-                    <h3 class="font-semibold text-xl mb-4 flex items-center gap-x-2"><i class="fa-brands fa-python text-yellow-500"></i> Python</h3>
-                    <div class="space-y-4 text-sm">
-                        <div><span class="font-medium">Теория:</span> 
-                            <a href="https://pythonexercises.rozh2sch.org.ua/" class="resource-link text-blue-600">Практикум (укр)</a>, 
-                            <a href="https://docs.python.org/3/tutorial/" class="resource-link text-blue-600">Официальный туториал</a>
-                        </div>
-                        <div><span class="font-medium">Практика:</span> 
-                            <a href="https://pynative.com/python-exercises-with-solutions/" class="resource-link text-blue-600">PyNative</a>, 
-                            <a href="https://www.w3resource.com/python-exercises/" class="resource-link text-blue-600">W3Resource</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="bg-white border rounded-3xl p-7">
-                    <h3 class="font-semibold text-xl mb-4 flex items-center gap-x-2"><i class="fa-solid fa-c text-slate-700"></i> C</h3>
-                    <div class="space-y-4 text-sm">
-                        <div><span class="font-medium">Теория + Практика:</span> 
-                            <a href="https://learn-c.org/" class="resource-link text-blue-600">learn-c.org</a>, 
-                            <a href="https://pynative.com/c-programming-exercises/" class="resource-link text-blue-600">PyNative C</a>, 
-                            <a href="https://codeforwin.org/" class="resource-link text-blue-600">Codeforwin</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- TIPS -->
-        <div id="section-tips" class="hidden">
-            <h2 class="text-3xl font-semibold mb-6">Полезные советы</h2>
-            <div class="grid md:grid-cols-2 gap-5 text-sm">
-                <div class="bg-white border rounded-3xl p-6">
-                    <h4 class="font-semibold mb-3">Как решать задачи</h4>
-                    <ul class="space-y-1.5 text-slate-600">
-                        <li>1. Прочитай условие 2 раза</li>
-                        <li>2. Напиши план на бумаге / комментариями</li>
-                        <li>3. Пиши код маленькими частями</li>
-                        <li>4. Тестируй на крайних случаях (0, 1, отрицательные)</li>
-                    </ul>
-                </div>
-                <div class="bg-white border rounded-3xl p-6">
-                    <h4 class="font-semibold mb-3">Python vs C</h4>
-                    <p class="text-slate-600">Python — проще для старта. C — учит работе с памятью. Решай одни и те же задачи на обеих языках — это лучший способ понять разницу.</p>
-                </div>
-            </div>
-        </div>
-
+        <button onclick="closePlayground()" class="w-9 h-9 flex items-center justify-center text-xl hover:bg-slate-100 rounded-2xl">×</button>
     </div>
 
-    <script>
-        // Detailed days data with tasks and resources
-        const days = [
-            {
-                day: 1,
-                title: "Основы: Переменные, типы данных, ввод/вывод",
-                focus: "Python + C",
-                theoryTime: "30 мин",
-                theoryResources: [
-                    {name: "PyNative Python Basics", url: "https://pynative.com/python-exercises-with-solutions/"},
-                    {name: "learn-c.org — Variables", url: "https://learn-c.org/"}
-                ],
-                practiceTasks: [
-                    "Выведи 'Hello, World!' на Python и на C",
-                    "Попроси пользователя ввести имя и возраст, выведи приветствие",
-                    "Создай переменные разных типов и выведи их типы (type() в Python)",
-                    "Попроси два числа и выведи их сумму, разность, произведение",
-                    "Конвертер температуры (Цельсий → Фаренгейт)",
-                    "Вычисли площадь круга по радиусу",
-                    "Поменяй значения двух переменных (swap)"
-                ],
-                recommended: 7
-            },
-            {
-                day: 2,
-                title: "Операторы и приведение типов",
-                focus: "Python + C",
-                theoryTime: "25 мин",
-                theoryResources: [
-                    {name: "pythonexercises.rozh2sch.org.ua (раздел 1)", url: "https://pythonexercises.rozh2sch.org.ua/"},
-                    {name: "W3Schools C — Operators", url: "https://www.w3schools.com/c/c_operators.php"}
-                ],
-                practiceTasks: [
-                    "Вычисли среднее арифметическое трёх чисел",
-                    "Проверь, является ли число чётным",
-                    "Конвертер валют (гривна → доллар)",
-                    "Вычисли остаток от деления и целую часть",
-                    "Простой калькулятор скидки",
-                    "Проверь, делится ли число на 3 и на 5 одновременно"
-                ],
-                recommended: 6
-            },
-            {
-                day: 3,
-                title: "Условные конструкции (if, elif, else)",
-                focus: "Python + C",
-                theoryTime: "35 мин",
-                theoryResources: [
-                    {name: "PyNative — Conditional Statements", url: "https://pynative.com/python-if-else/"},
-                    {name: "learn-c.org — Conditions", url: "https://learn-c.org/"}
-                ],
-                practiceTasks: [
-                    "Определи, является ли число положительным, отрицательным или нулём",
-                    "Калькулятор с выбором операции (+ - * /)",
-                    "Проверь, является ли год високосным",
-                    "Определи наибольшее из трёх чисел",
-                    "Простая игра: угадай число (компьютер загадывает)",
-                    "Классификация треугольника по сторонам"
-                ],
-                recommended: 6
-            },
-            {
-                day: 4,
-                title: "Циклы (for, while)",
-                focus: "Python + C",
-                theoryTime: "40 мин",
-                theoryResources: [
-                    {name: "pythonexercises.rozh2sch.org.ua (циклы)", url: "https://pythonexercises.rozh2sch.org.ua/"},
-                    {name: "W3Schools C — Loops", url: "https://www.w3schools.com/c/c_loops.php"}
-                ],
-                practiceTasks: [
-                    "Выведи числа от 1 до 100",
-                    "Выведи все чётные числа от 1 до 50",
-                    "Посчитай сумму чисел от 1 до n",
-                    "Таблица умножения (от 1 до 10)",
-                    "Факториал числа",
-                    "Числа Фибоначчи (первые 15)",
-                    "Проверь, является ли число простым"
-                ],
-                recommended: 7
-            },
-            {
-                day: 5,
-                title: "Функции",
-                focus: "Python + C",
-                theoryTime: "35 мин",
-                theoryResources: [
-                    {name: "PyNative — Python Functions", url: "https://pynative.com/python-functions/"},
-                    {name: "Programiz C — Functions", url: "https://www.programiz.com/c-programming/c-functions"}
-                ],
-                practiceTasks: [
-                    "Функция, которая возвращает максимум из двух чисел",
-                    "Функция приветствия с параметром имени",
-                    "Функция, которая проверяет, является ли число чётным",
-                    "Функция для вычисления факториала",
-                    "Функция, которая возвращает сумму цифр числа",
-                    "Функция, которая переворачивает строку"
-                ],
-                recommended: 6
-            },
-            {
-                day: 6,
-                title: "Рекурсия",
-                focus: "Python + C",
-                theoryTime: "30 мин",
-                theoryResources: [
-                    {name: "Real Python — Recursion", url: "https://realpython.com/python-recursion/"},
-                    {name: "GeeksforGeeks — Recursion in C", url: "https://www.geeksforgeeks.org/c/recursion-in-c/"}
-                ],
-                practiceTasks: [
-                    "Рекурсивный факториал",
-                    "Рекурсивные числа Фибоначчи",
-                    "Рекурсивная сумма цифр числа",
-                    "Рекурсивный подсчёт количества цифр в числе",
-                    "Рекурсивный поиск максимума в списке/массиве"
-                ],
-                recommended: 5
-            },
-            {
-                day: 7,
-                title: "Списки / Массивы",
-                focus: "Python + C",
-                theoryTime: "40 мин",
-                theoryResources: [
-                    {name: "PyNative — Python Lists", url: "https://pynative.com/python-lists/"},
-                    {name: "W3Schools C — Arrays", url: "https://www.w3schools.com/c/c_arrays.php"}
-                ],
-                practiceTasks: [
-                    "Создай список из 10 случайных чисел и найди максимум/минимум",
-                    "Посчитай сумму всех элементов списка",
-                    "Разверни список без использования reverse()",
-                    "Найди количество чётных и нечётных чисел в списке",
-                    "Удалить все дубликаты из списка",
-                    "Сортировка пузырьком (Bubble Sort)"
-                ],
-                recommended: 6
-            },
-            {
-                day: 8,
-                title: "Словари, множества, строки (Python) + Strings (C)",
-                focus: "Python + C",
-                theoryTime: "35 мин",
-                theoryResources: [
-                    {name: "PyNative — Dictionaries & Sets", url: "https://pynative.com/python-dictionaries/"},
-                    {name: "Programiz C — Strings", url: "https://www.programiz.com/c-programming/c-strings"}
-                ],
-                practiceTasks: [
-                    "Подсчёт частоты каждого символа в строке",
-                    "Проверь, является ли строка палиндромом",
-                    "Найди самое длинное слово в предложении",
-                    "Создай словарь: имя → возраст (минимум 5 записей)",
-                    "Объедини два словаря",
-                    "Подсчёт количества слов в тексте"
-                ],
-                recommended: 6
-            },
-            {
-                day: 9,
-                title: "Pointers в C (самый важный день!)",
-                focus: "C",
-                theoryTime: "50 мин",
-                theoryResources: [
-                    {name: "PyNative — C Pointers Exercises", url: "https://pynative.com/c-programming-pointers-exercises/"},
-                    {name: "learn-c.org — Pointers", url: "https://learn-c.org/"}
-                ],
-                practiceTasks: [
-                    "Поменяй значения двух переменных через указатели (swap)",
-                    "Выведи адрес и значение переменной",
-                    "Пройди по массиву с помощью указателя",
-                    "Напиши функцию, которая меняет значение через указатель",
-                    "Динамическое выделение памяти под массив (malloc)",
-                    "Копирование строки с помощью указателей"
-                ],
-                recommended: 6
-            },
-            {
-                day: 10,
-                title: "Работа с файлами",
-                focus: "Python + C",
-                theoryTime: "30 мин",
-                theoryResources: [
-                    {name: "PyNative — File Handling", url: "https://pynative.com/python-file-handling/"},
-                    {name: "W3Schools C — Files", url: "https://www.w3schools.com/c/c_files.php"}
-                ],
-                practiceTasks: [
-                    "Запиши 10 чисел в файл",
-                    "Прочитай файл и посчитай сумму чисел",
-                    "Подсчёт количества строк в файле",
-                    "Запиши в файл список студентов и их оценки",
-                    "Прочитай CSV-файл (простой) и выведи данные",
-                    "Создай простой 'дневник' — добавляй записи и сохраняй"
-                ],
-                recommended: 6
-            },
-            {
-                day: 11,
-                title: "OOP Basics + Алгоритмы",
-                focus: "Python + C",
-                theoryTime: "40 мин",
-                theoryResources: [
-                    {name: "PyNative — OOP", url: "https://pynative.com/python-object-oriented-programming/"},
-                    {name: "GeeksforGeeks — Struct in C", url: "https://www.geeksforgeeks.org/c/structures-in-c/"}
-                ],
-                practiceTasks: [
-                    "Создай класс Student с полями имя, возраст, оценки",
-                    "Добавь метод, который возвращает средний балл",
-                    "Реализуй Bubble Sort",
-                    "Реализуй Linear Search",
-                    "Создай структуру в C (struct Student)"
-                ],
-                recommended: 5
-            },
-            {
-                day: 12,
-                title: "Повторение + Симуляция экзамена",
-                focus: "Python + C",
-                theoryTime: "60 мин",
-                theoryResources: [],
-                practiceTasks: [
-                    "Решить 3 задачи разной сложности на Python",
-                    "Решить 3 задачи на C (включая указатели)",
-                    "Написать FizzBuzz на обоих языках",
-                    "Написать простой калькулятор с циклом",
-                    "Повторить все слабые темы"
-                ],
-                recommended: 5
-            }
-        ];
+    <div class="p-6 flex-1 overflow-auto">
+        <!-- Quick examples -->
+        <div class="mb-4">
+            <div class="text-xs uppercase tracking-widest text-slate-500 mb-2">Быстрые примеры</div>
+            <div class="flex flex-wrap gap-2">
+                <button onclick="loadExample(0)" class="text-xs px-3 py-1.5 bg-slate-100 hover:bg-slate-200 rounded-2xl">Hello World</button>
+                <button onclick="loadExample(1)" class="text-xs px-3 py-1.5 bg-slate-100 hover:bg-slate-200 rounded-2xl">Калькулятор</button>
+                <button onclick="loadExample(2)" class="text-xs px-3 py-1.5 bg-slate-100 hover:bg-slate-200 rounded-2xl">Список + цикл</button>
+                <button onclick="loadExample(3)" class="text-xs px-3 py-1.5 bg-slate-100 hover:bg-slate-200 rounded-2xl">Функция + словарь</button>
+            </div>
+        </div>
 
-        function renderDays() {
-            const container = document.getElementById('days-container');
-            container.innerHTML = '';
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+            <!-- Code Editor -->
+            <div>
+                <div class="flex justify-between items-center mb-2">
+                    <div class="text-sm font-medium">Код Python</div>
+                    <button onclick="runPythonCode()" 
+                            class="flex items-center gap-x-2 bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-1.5 rounded-2xl text-sm font-medium">
+                        <i class="fa-solid fa-play"></i>
+                        <span>Запустить</span>
+                    </button>
+                </div>
+                <textarea id="python-code" spellcheck="false"
+                          class="w-full h-80 font-mono text-sm p-4 rounded-2xl border bg-slate-900 text-emerald-300 resize-y focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                          placeholder="print('Привет, Олексій!')"></textarea>
+            </div>
 
-            days.forEach(d => {
-                const completed = localStorage.getItem(`day-${d.day}`) === 'true';
-                
-                let html = `
-                <div class="day-card bg-white border rounded-3xl overflow-hidden ${completed ? 'opacity-80' : ''}" id="day-card-${d.day}">
-                    <div onclick="toggleDay(${d.day})" class="px-6 py-5 flex items-center justify-between cursor-pointer border-b">
-                        <div class="flex items-center gap-x-4">
-                            <div class="w-9 h-9 rounded-2xl flex-shrink-0 flex items-center justify-center text-sm font-semibold 
-                                ${completed ? 'bg-emerald-100 text-emerald-600' : 'bg-blue-100 text-blue-600'}">
-                                ${d.day}
-                            </div>
-                            <div>
-                                <div class="font-semibold">${d.title}</div>
-                                <div class="text-xs text-slate-500">${d.focus} • ${d.theoryTime}</div>
-                            </div>
-                        </div>
-                        
-                        <div class="flex items-center gap-x-3">
-                            <div onclick="event.stopImmediatePropagation(); toggleComplete(${d.day}, this)" 
-                                 class="w-8 h-8 flex items-center justify-center rounded-2xl border text-sm transition-all
-                                 ${completed ? 'bg-emerald-500 border-emerald-500 text-white' : 'border-slate-300 hover:bg-slate-100'}">
-                                <i class="fa-solid fa-check"></i>
-                            </div>
-                        </div>
+            <!-- Output -->
+            <div>
+                <div class="flex justify-between items-center mb-2">
+                    <div class="text-sm font-medium">Вывод</div>
+                    <button onclick="clearOutput()" class="text-xs px-3 py-1 rounded-2xl border hover:bg-slate-100">Очистить</button>
+                </div>
+                <div id="python-output" 
+                     class="bg-slate-900 text-emerald-300 font-mono text-sm p-4 rounded-2xl h-80 overflow-auto whitespace-pre-wrap border"></div>
+            </div>
+        </div>
+        
+        <div class="mt-3 text-xs text-slate-500">
+            Pyodide загружается при первом запуске (~10-15 сек). Работает полностью в браузере.
+        </div>
+    </div>
+</div>
+</div>
+
+<script>
+// ==================== ДАННЫЕ ДНЕЙ ====================
+const days = [
+{
+day: 1,
+title: "Основы: Переменные, типы данных, ввод/вывод",
+focus: "Python или C",
+theoryTime: "30 мин",
+theoryResources: [
+{ name: "PyNative Python Basics", url: "https://pynative.com/python-exercises-with-solutions/" },
+{ name: "learn-c.org — Variables", url: "https://learn-c.org/" },
+{ name: "MateAcademy - Python Basics", url: "https://mate.academy/study/python?module=python-basics" }
+],
+practiceTasks: [
+{ text: "Выведи 'Hello, World!' на Python и на C", difficulty: 1 },
+{ text: "Попроси пользователя ввести имя и возраст, выведи приветствие", difficulty: 1 },
+{ text: "Создай переменные разных типов и выведи их типы", difficulty: 1 },
+{ text: "Попроси два числа и выведи сумму, разность, произведение", difficulty: 1 },
+{ text: "Конвертер температуры (Цельсий → Фаренгейт)", difficulty: 2 },
+{ text: "Вычисли площадь круга по радиусу", difficulty: 1 },
+{ text: "Поменяй значения двух переменных (swap)", difficulty: 2 }
+],
+examples: [
+{ title: "Hello World на Python", code: 'print("Hello, World!")' },
+{ title: "Hello World на C", code: '#include <stdio.h>\n\nint main() {\n printf("Hello, World!\\n");\n return 0;\n}' },
+{ title: "Ввод и вывод + типы данных (Python)", code: 'name = input("Введите имя: ")\nage = int(input("Введите возраст: "))\nprint(f"Привет, {name}! Тебе {age} лет.")\n\nx = 10 # int\npi = 3.14 # float\nis_student = True # bool\nprint(type(x), type(pi), type(is_student))' },
+{ title: "Простой калькулятор (Python)", code: 'a = float(input("Первое число: "))\nb = float(input("Второе число: "))\nprint(f"Сумма: {a + b}")\nprint(f"Разность: {a - b}")\nprint(f"Произведение: {a * b}")\nprint(f"Частное: {a / b}")' }
+]
+},
+{
+day: 2,
+title: "Операторы и приведение типов",
+focus: "Python или C",
+theoryTime: "25 мин",
+theoryResources: [
+{ name: "pythonexercises.rozh2sch.org.ua", url: "https://pythonexercises.rozh2sch.org.ua/" },
+{ name: "MateAcademy - Python Operators", url: "https://mate.academy/study/python?module=python-operators" }
+],
+practiceTasks: [
+{ text: "Вычисли среднее арифметическое трёх чисел", difficulty: 1 },
+{ text: "Проверь, является ли число чётным", difficulty: 1 },
+{ text: "Конвертер валют (гривна → доллар)", difficulty: 2 },
+{ text: "Вычисли остаток от деления и целую часть", difficulty: 1 },
+{ text: "Простой калькулятор скидки", difficulty: 2 },
+{ text: "Проверь, делится ли число на 3 и на 5 одновременно", difficulty: 2 }
+],
+practiceTasks: [
+{ text: "Вычисли среднее арифметическое трёх чисел", difficulty: 1 },
+{ text: "Проверь, является ли число чётным", difficulty: 1 },
+{ text: "Конвертер валют (гривна → доллар)", difficulty: 2 },
+{ text: "Вычисли остаток от деления и целую часть", difficulty: 1 },
+{ text: "Простой калькулятор скидки", difficulty: 2 },
+{ text: "Проверь, делится ли число на 3 и на 5 одновременно", difficulty: 2 }
+],
+examples: [
+{ title: "Арифметические операторы (Python)", code: 'a, b = 17, 5\nprint(a + b) # 22\nprint(a - b) # 12\nprint(a * b) # 85\nprint(a / b) # 3.4\nprint(a // b) # 3 (целая часть)\nprint(a % b) # 2 (остаток)\nprint(a ** 2) # 289 (степень)' },
+{ title: "Приведение типов (Python)", code: 'x = "42"\ny = int(x) + 10 # 52\nz = float("3.14") * 2 # 6.28\nprint(str(100) + " рублей") # "100 рублей"' },
+{ title: "Проверка чётности (Python)", code: 'num = int(input("Введите число: "))\nif num % 2 == 0:\n print("Число чётное")\nelse:\n print("Число нечётное")' }
+]
+},
+{
+day: 3,
+title: "Условные конструкции (if, elif, else)",
+focus: "Python или C",
+theoryTime: "35 мин",
+theoryResources: [
+{ name: "PyNative — Conditional Statements", url: "https://pynative.com/python-if-else/" },
+{ name: "MateAcademy - Python Conditionals", url: "https://mate.academy/study/python?module=python-conditionals" }
+],
+practiceTasks: [
+{ text: "Определи, является ли число положительным, отрицательным или нулём", difficulty: 1 },
+{ text: "Калькулятор с выбором операции (+ - * /)", difficulty: 2 },
+{ text: "Проверь, является ли год високосным", difficulty: 2 },
+{ text: "Определи наибольшее из трёх чисел", difficulty: 1 },
+{ text: "Простая игра: угадай число", difficulty: 3 },
+{ text: "Классификация треугольника по сторонам", difficulty: 2 }
+],
+examples: [
+{ title: "Проверка числа (Python)", code: 'num = int(input("Введите число: "))\n\nif num > 0:\n print("Положительное")\nelif num < 0:\n print("Отрицательное")\nelse:\n print("Ноль")' },
+{ title: "Простой калькулятор (Python)", code: 'a = float(input("Первое число: "))\nop = input("Операция (+ - * /): ")\nb = float(input("Второе число: "))\n\nif op == "+":\n print(a + b)\nelif op == "-":\n print(a - b)\nelif op == "*":\n print(a * b)\nelif op == "/":\n print(a / b if b != 0 else "Ошибка: деление на ноль")\nelse:\n print("Неизвестная операция")' },
+{ title: "Високосный год (Python)", code: 'year = int(input("Введите год: "))\n\nif (year % 4 == 0 and year % 100 != 0) or (year % 400 == 0):\n print(f"{year} — високосный год")\nelse:\n print(f"{year} — не високосный год")' }
+]
+},
+{
+day: 4,
+title: "Циклы (for, while)",
+focus: "Python или C",
+theoryTime: "40 мин",
+theoryResources: [
+{ name: "pythonexercises.rozh2sch.org.ua (циклы)", url: "https://pythonexercises.rozh2sch.org.ua/" },
+{ name: "MateAcademy - Python Loops", url: "https://mate.academy/study/python?module=python-loops" }
+],
+practiceTasks: [
+{ text: "Выведи числа от 1 до 100", difficulty: 1 },
+{ text: "Выведи все чётные числа от 1 до 50", difficulty: 1 },
+{ text: "Посчитай сумму чисел от 1 до n", difficulty: 1 },
+{ text: "Таблица умножения (от 1 до 10)", difficulty: 2 },
+{ text: "Факториал числа", difficulty: 2 },
+{ text: "Числа Фибоначчи (первые 15)", difficulty: 2 },
+{ text: "Проверь, является ли число простым", difficulty: 3 }
+],
+examples: [
+{ title: "Цикл for — сумма чисел (Python)", code: 'n = int(input("Введите n: "))\nsumma = 0\nfor i in range(1, n + 1):\n summa += i\nprint(f"Сумма от 1 до {n} = {summa}")' },
+{ title: "Цикл while — числа Фибоначчи (Python)", code: 'n = 15\na, b = 0, 1\ncount = 0\n\nprint("Первые 15 чисел Фибоначчи:")\nwhile count < n:\n print(a, end=" ")\n a, b = b, a + b\n count += 1' },
+{ title: "Таблица умножения (Python)", code: 'for i in range(1, 11):\n for j in range(1, 11):\n print(f"{i}×{j}={i*j:2}", end=" ")\n print()' }
+]
+},
+{
+day: 5,
+title: "Функции",
+focus: "Python или C",
+theoryTime: "35 мин",
+theoryResources: [
+{ name: "PyNative — Python Functions", url: "https://pynative.com/python-functions/" },
+{ name: "MateAcademy - Python Functions", url: "https://mate.academy/study/python?module=python-functions" }
+],
+practiceTasks: [
+{ text: "Функция, которая возвращает максимум из двух чисел", difficulty: 1 },
+{ text: "Функция приветствия с параметром имени", difficulty: 1 },
+{ text: "Функция, которая проверяет, является ли число чётным", difficulty: 1 },
+{ text: "Функция для вычисления факториала", difficulty: 2 },
+{ text: "Функция, которая возвращает сумму цифр числа", difficulty: 2 },
+{ text: "Функция, которая переворачивает строку", difficulty: 2 }
+],
+examples: [
+{ title: "Простые функции (Python)", code: 'def greet(name):\n return f"Привет, {name}!"\n\ndef is_even(n):\n return n % 2 == 0\n\ndef max_of_two(a, b):\n return a if a > b else b\n\nprint(greet("Олексій"))\nprint(is_even(42)) # True\nprint(max_of_two(15, 28)) # 28' },
+{ title: "Функция факториала (Python)", code: 'def factorial(n):\n result = 1\n for i in range(1, n + 1):\n result *= i\n return result\n\nprint(factorial(5)) # 120\nprint(factorial(7)) # 5040' },
+{ title: "Функция суммы цифр (Python)", code: 'def sum_of_digits(n):\n total = 0\n while n > 0:\n total += n % 10\n n //= 10\n return total\n\nprint(sum_of_digits(1234)) # 10' }
+]
+},
+{
+day: 6,
+title: "Рекурсия",
+focus: "Python или C",
+theoryTime: "30 мин",
+theoryResources: [
+{ name: "Real Python — Recursion", url: "https://realpython.com/python-recursion/" },
+{ name: "MateAcademy - Python Recursion", url: "https://mate.academy/study/python?module=python-recursion" }
+],
+practiceTasks: [
+{ text: "Рекурсивный факториал", difficulty: 2 },
+{ text: "Рекурсивные числа Фибоначчи", difficulty: 2 },
+{ text: "Рекурсивная сумма цифр числа", difficulty: 2 },
+{ text: "Рекурсивный подсчёт количества цифр в числе", difficulty: 2 },
+{ text: "Рекурсивный поиск максимума в списке", difficulty: 3 }
+],
+examples: [
+{ title: "Рекурсивный факториал (Python)", code: 'def factorial(n):\n if n <= 1:\n return 1\n return n * factorial(n - 1)\n\nprint(factorial(5)) # 120\nprint(factorial(7)) # 5040' },
+{ title: "Рекурсивные числа Фибоначчи (Python)", code: 'def fib(n):\n if n <= 1:\n return n\n return fib(n - 1) + fib(n - 2)\n\nfor i in range(10):\n print(fib(i), end=" ") # 0 1 1 2 3 5 8 13 21 34' },
+{ title: "Рекурсивная сумма цифр (Python)", code: 'def sum_digits(n):\n if n < 10:\n return n\n return n % 10 + sum_digits(n // 10)\n\nprint(sum_digits(9876)) # 30' }
+]
+},
+{
+day: 7,
+title: "Списки / Массивы",
+focus: "Python или C",
+theoryTime: "40 мин",
+theoryResources: [
+{ name: "PyNative — Python Lists", url: "https://pynative.com/python-lists/" },
+{ name: "MateAcademy - Python Lists", url: "https://mate.academy/study/python?module=python-lists" }
+],
+practiceTasks: [
+{ text: "Создай список из 10 случайных чисел и найди максимум/минимум", difficulty: 1 },
+{ text: "Посчитай сумму всех элементов списка", difficulty: 1 },
+{ text: "Разверни список без reverse()", difficulty: 2 },
+{ text: "Найди количество чётных и нечётных чисел", difficulty: 1 },
+{ text: "Удалить все дубликаты из списка", difficulty: 2 },
+{ text: "Сортировка пузырьком (Bubble Sort)", difficulty: 3 }
+],
+examples: [
+{ title: "Работа со списками (Python)", code: 'nums = [3, 7, 1, 9, 4, 6, 2]\n\nprint("Максимум:", max(nums))\nprint("Минимум:", min(nums))\nprint("Сумма:", sum(nums))\nprint("Длина:", len(nums))\n\n# Разворот списка\nreversed_list = nums[::-1]\nprint("Развёрнутый:", reversed_list)\n\n# Удаление дубликатов\nunique = list(set(nums))' },
+{ title: "Сортировка пузырьком (Python)", code: 'def bubble_sort(arr):\n n = len(arr)\n for i in range(n):\n for j in range(0, n - i - 1):\n if arr[j] > arr[j + 1]:\n arr[j], arr[j + 1] = arr[j + 1], arr[j]\n return arr\n\nprint(bubble_sort([64, 34, 25, 12, 22, 11, 90]))' },
+{ title: "Простой массив в C", code: '#include <stdio.h>\n\nint main() {\n int arr[5] = {10, 20, 30, 40, 50};\n int sum = 0;\n \n for(int i = 0; i < 5; i++) {\n sum += arr[i];\n printf("%d ", arr[i]);\n }\n printf("\\nСумма = %d\\n", sum);\n return 0;\n}' }
+]
+},
+{
+day: 8,
+title: "Словари, множества, строки",
+focus: "Python или C",
+theoryTime: "35 мин",
+theoryResources: [
+{ name: "PyNative — Dictionaries & Sets", url: "https://pynative.com/python-dictionaries/" },
+{ name: "MateAcademy - Python Dictionaries", url: "https://mate.academy/study/python?module=python-dictionaries" }
+],
+practiceTasks: [
+{ text: "Подсчёт частоты каждого символа в строке", difficulty: 2 },
+{ text: "Проверь, является ли строка палиндромом", difficulty: 2 },
+{ text: "Найди самое длинное слово в предложении", difficulty: 2 },
+{ text: "Создай словарь имя → возраст (5 записей)", difficulty: 1 },
+{ text: "Объедини два словаря", difficulty: 1 },
+{ text: "Подсчёт количества слов в тексте", difficulty: 1 }
+],
+examples: [
+{ title: "Словари (Python)", code: 'student = {\n "name": "Олексій",\n "age": 25,\n "city": "Киев",\n "grades": [95, 88, 92]\n}\n\nprint(student["name"])\nprint("Возраст:", student.get("age"))\n\n# Добавление\nstudent["university"] = "КНУ"\n\n# Перебор\nfor key, value in student.items():\n print(f"{key}: {value}")' },
+{ title: "Подсчёт частоты символов (Python)", code: 'text = "программирование"\nfreq = {}\n\nfor char in text:\n freq[char] = freq.get(char, 0) + 1\n\nprint(freq)\n# {\'п\': 1, \'р\': 3, \'о\': 2, ...}' },
+{ title: "Проверка палиндрома (Python)", code: 'def is_palindrome(s):\n s = s.lower().replace(" ", "")\n return s == s[::-1]\n\nprint(is_palindrome("А роза упала на лапу Азора")) # True\nprint(is_palindrome("hello")) # False' }
+]
+},
+{
+day: 9,
+title: "Pointers в C (самый важный день!)",
+focus: "C",
+theoryTime: "50 мин",
+theoryResources: [
+{ name: "PyNative — C Pointers Exercises", url: "https://pynative.com/c-programming-pointers-exercises/" },
+{ name: "learn-c.org — Pointers", url: "https://learn-c.org/" }
+],
+practiceTasks: [
+{ text: "Поменяй значения двух переменных через указатели", difficulty: 2 },
+{ text: "Выведи адрес и значение переменной", difficulty: 1 },
+{ text: "Пройди по массиву с помощью указателя", difficulty: 2 },
+{ text: "Напиши функцию, меняющую значение через указатель", difficulty: 3 },
+{ text: "Динамическое выделение памяти (malloc)", difficulty: 3 },
+{ text: "Копирование строки с помощью указателей", difficulty: 2 }
+],
+examples: [
+{ title: "Базовая работа с указателями (C)", code: '#include <stdio.h>\n\nint main() {\n int x = 42;\n int *ptr = &x; // указатель на x\n \n printf("Значение x: %d\\n", x);\n printf("Адрес x: %p\\n", (void*)&x);\n printf("Значение через ptr: %d\\n", *ptr);\n \n *ptr = 100; // меняем значение через указатель\n printf("Новое значение x: %d\\n", x);\n return 0;\n}' },
+{ title: "Swap через указатели (C)", code: '#include <stdio.h>\n\nvoid swap(int *a, int *b) {\n int temp = *a;\n *a = *b;\n *b = temp;\n}\n\nint main() {\n int x = 10, y = 20;\n printf("До: x=%d, y=%d\\n", x, y);\n swap(&x, &y);\n printf("После: x=%d, y=%d\\n", x, y);\n return 0;\n}' },
+{ title: "Указатели и массивы (C)", code: '#include <stdio.h>\n\nint main() {\n int arr[5] = {10, 20, 30, 40, 50};\n int *p = arr; // указатель на первый элемент\n \n for(int i = 0; i < 5; i++) {\n printf("%d ", *(p + i)); // или p[i]\n }\n return 0;\n}' },
+{ title: "malloc — динамическая память (C)", code: '#include <stdio.h>\n#include <stdlib.h>\n\nint main() {\n int n = 5;\n int *arr = (int*)malloc(n * sizeof(int));\n \n for(int i = 0; i < n; i++) arr[i] = i * 10;\n for(int i = 0; i < n; i++) printf("%d ", arr[i]);\n \n free(arr); // обязательно освобождаем память!\n return 0;\n}' }
+]
+},
+{
+day: 10,
+title: "Работа с файлами",
+focus: "Python или C",
+theoryTime: "30 мин",
+theoryResources: [
+{ name: "PyNative — File Handling", url: "https://pynative.com/python-file-handling/" },
+{ name: "W3Schools C — Files", url: "https://www.w3schools.com/c/c_files.php" }
+],
+practiceTasks: [
+{ text: "Запиши 10 чисел в файл", difficulty: 1 },
+{ text: "Прочитай файл и посчитай сумму чисел", difficulty: 1 },
+{ text: "Подсчёт количества строк в файле", difficulty: 1 },
+{ text: "Запиши список студентов и оценки в файл", difficulty: 2 },
+{ text: "Прочитай простой CSV и выведи данные", difficulty: 2 },
+{ text: "Создай простой дневник с сохранением", difficulty: 2 }
+],
+examples: [
+{ title: "Запись и чтение файла (Python)", code: '# Запись в файл\nwith open("numbers.txt", "w", encoding="utf-8") as f:\n for i in range(1, 11):\n f.write(f"{i}\\n")\n\n# Чтение файла\nwith open("numbers.txt", "r", encoding="utf-8") as f:\n total = 0\n for line in f:\n total += int(line.strip())\n print("Сумма:", total)' },
+{ title: "Работа с файлами в C", code: '#include <stdio.h>\n\nint main() {\n FILE *file = fopen("data.txt", "w");\n if (file == NULL) return 1;\n \n fprintf(file, "Привет из C!\\n");\n fprintf(file, "Число: %d\\n", 42);\n fclose(file);\n \n // Чтение\n file = fopen("data.txt", "r");\n char line[100];\n while (fgets(line, sizeof(line), file)) {\n printf("%s", line);\n }\n fclose(file);\n return 0;\n}' },
+{ title: "Подсчёт строк в файле (Python)", code: 'with open("text.txt", "r", encoding="utf-8") as f:\n lines = f.readlines()\n print(f"Количество строк: {len(lines)}")' }
+]
+},
+{
+day: 11,
+title: "OOP Basics + Алгоритмы",
+focus: "Python или C",
+theoryTime: "40 мин",
+theoryResources: [
+{ name: "PyNative — OOP", url: "https://pynative.com/python-object-oriented-programming/" },
+{ name: "GeeksforGeeks — Struct in C", url: "https://www.geeksforgeeks.org/c/structures-in-c/" }
+],
+practiceTasks: [
+{ text: "Создай класс Student с полями имя, возраст, оценки", difficulty: 2 },
+{ text: "Добавь метод, возвращающий средний балл", difficulty: 2 },
+{ text: "Реализуй Bubble Sort", difficulty: 3 },
+{ text: "Реализуй Linear Search", difficulty: 2 },
+{ text: "Создай структуру struct Student в C", difficulty: 2 }
+],
+examples: [
+{ title: "Класс Student (Python)", code: 'class Student:\n def __init__(self, name, age):\n self.name = name\n self.age = age\n self.grades = []\n \n def add_grade(self, grade):\n self.grades.append(grade)\n \n def average(self):\n return sum(self.grades) / len(self.grades) if self.grades else 0\n\ns = Student("Олексій", 25)\ns.add_grade(90)\ns.add_grade(85)\ns.add_grade(95)\nprint(f"{s.name}: средний балл = {s.average():.1f}")' },
+{ title: "struct в C", code: '#include <stdio.h>\n#include <string.h>\n\nstruct Student {\n char name[50];\n int age;\n float average;\n};\n\nint main() {\n struct Student s1;\n strcpy(s1.name, "Олексій");\n s1.age = 25;\n s1.average = 91.5;\n \n printf("%s, %d лет, средний балл: %.1f\\n", \n s1.name, s1.age, s1.average);\n return 0;\n}' },
+{ title: "Linear Search (Python)", code: 'def linear_search(arr, target):\n for i in range(len(arr)):\n if arr[i] == target:\n return i\n return -1\n\nnums = [4, 2, 7, 1, 9, 3]\nprint(linear_search(nums, 7)) # 2\nprint(linear_search(nums, 10)) # -1' }
+]
+},
+{
+day: 12,
+title: "Повторение + Симуляция экзамена",
+focus: "Python + C",
+theoryTime: "60 мин",
+theoryResources: [],
+practiceTasks: [
+{ text: "Решить 3 задачи разной сложности на Python", difficulty: 2 },
+{ text: "Решить 3 задачи на C (включая указатели)", difficulty: 3 },
+{ text: "Написать FizzBuzz на обоих языках", difficulty: 2 },
+{ text: "Написать калькулятор с циклом", difficulty: 1 },
+{ text: "Повторить слабые темы", difficulty: 1 }
+],
+examples: [
+{ title: "FizzBuzz (Python)", code: 'for i in range(1, 101):\n if i % 3 == 0 and i % 5 == 0:\n print("FizzBuzz")\n elif i % 3 == 0:\n print("Fizz")\n elif i % 5 == 0:\n print("Buzz")\n else:\n print(i)' },
+{ title: "FizzBuzz на C", code: '#include <stdio.h>\n\nint main() {\n for(int i = 1; i <= 100; i++) {\n if(i % 3 == 0 && i % 5 == 0) printf("FizzBuzz\\n");\n else if(i % 3 == 0) printf("Fizz\\n");\n else if(i % 5 == 0) printf("Buzz\\n");\n else printf("%d\\n", i);\n }\n return 0;\n}' },
+{ title: "Калькулятор с циклом (Python)", code: 'while True:\n print("\\n1. Сложить 2. Вычесть 3. Умножить 4. Разделить 0. Выход")\n choice = input("Выберите операцию: ")\n if choice == "0": break\n a = float(input("Первое число: "))\n b = float(input("Второе число: "))\n if choice == "1": print("Результат:", a + b)\n elif choice == "2": print("Результат:", a - b)\n elif choice == "3": print("Результат:", a * b)\n elif choice == "4": print("Результат:", a / b if b != 0 else "Ошибка")' }
+]
+}
+];
+
+// ==================== ПЕРСОНАЛИЗАЦИЯ ====================
+function getUserInfo() {
+return {
+name: localStorage.getItem('userName') || 'Гость',
+city: localStorage.getItem('userCity') || 'Киев'
+};
+}
+function updateUserInfoDisplay() {
+const { name, city } = getUserInfo();
+document.getElementById('user-info').innerText = `${name} • ${city}`;
+}
+function editUserInfo() {
+const { name, city } = getUserInfo();
+const newName = prompt('Введите имя:', name);
+if (newName === null) return;
+const newCity = prompt('Введите город:', city);
+if (newCity === null) return;
+localStorage.setItem('userName', newName.trim());
+localStorage.setItem('userCity', newCity.trim());
+updateUserInfoDisplay();
+}
+
+// ==================== ТЁМНАЯ ТЕМА ====================
+function toggleTheme() {
+const html = document.documentElement;
+html.classList.toggle('dark');
+
+const isDark = html.classList.contains('dark');
+localStorage.setItem('theme', isDark ? 'dark' : 'light');
+
+updateThemeIcon(isDark);
+}
+
+function updateThemeIcon(isDark) {
+const icon = document.getElementById('theme-icon');
+if (!icon) return;
+if (isDark) {
+icon.classList.remove('fa-moon');
+icon.classList.add('fa-sun');
+} else {
+icon.classList.remove('fa-sun');
+icon.classList.add('fa-moon');
+}
+}
+
+function initTheme() {
+const savedTheme = localStorage.getItem('theme');
+const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
+document.documentElement.classList.add('dark');
+updateThemeIcon(true);
+} else {
+updateThemeIcon(false);
+}
+}
+
+// ==================== СЛОЖНОСТЬ ====================
+function getDifficultyStars(level) {
+if (level === 1) return '<span class="difficulty-1">★</span>';
+if (level === 2) return '<span class="difficulty-2">★★</span>';
+if (level === 3) return '<span class="difficulty-3">★★★</span>';
+return '';
+}
+
+// ==================== РЕНДЕР ДНЕЙ ====================
+function renderDays() {
+const container = document.getElementById('days-container');
+container.innerHTML = '';
+
+days.forEach(d => {
+const dayDone = localStorage.getItem(`day-${d.day}`) === 'true';
+let completedCount = 0;
+d.practiceTasks.forEach((_, i) => {
+if (localStorage.getItem(`task-${d.day}-${i}`) === 'true') completedCount++;
+});
+
+const confidence = localStorage.getItem(`confidence-${d.day}`) || 0;
+let confidenceHTML = '';
+for (let i = 1; i <= 5; i++) {
+const active = i <= parseInt(confidence);
+confidenceHTML += `<button onclick="setConfidence(${d.day}, ${i}, this)" class="w-7 h-7 text-lg transition-colors ${active ? 'text-yellow-400' : 'text-slate-300 hover:text-yellow-300'}">★</button>`;
+}
+
+let html = `
+<div class="day-card bg-white border rounded-3xl overflow-hidden ${dayDone ? 'opacity-80' : ''}" id="day-card-${d.day}">
+    <div onclick="toggleDay(${d.day})" class="px-6 py-5 flex items-center justify-between cursor-pointer border-b">
+        <div class="flex items-center gap-x-4">
+            <div class="w-9 h-9 rounded-2xl flex-shrink-0 flex items-center justify-center text-sm font-semibold
+${dayDone ? 'bg-emerald-100 text-emerald-600' : 'bg-blue-100 text-blue-600'}">
+${d.day}
+            </div>
+            <div>
+                <div class="font-semibold">${d.title}</div>
+                <div class="text-xs text-slate-500">${d.focus} • ${d.theoryTime}</div>
+            </div>
+        </div>
+        <div class="flex items-center gap-x-3">
+            <div class="text-xs px-3 py-1 bg-white border rounded-full">${completedCount}/${d.practiceTasks.length}</div>
+            <div onclick="event.stopImmediatePropagation(); toggleDayDone(${d.day})"
+                 class="w-8 h-8 flex items-center justify-center rounded-2xl border text-sm transition-all
+${dayDone ? 'bg-emerald-500 border-emerald-500 text-white' : 'border-slate-300 hover:bg-slate-100'}">
+                <i class="fa-solid fa-check"></i>
+            </div>
+        </div>
+    </div>
+    <div class="hidden px-6 py-6 bg-slate-50" id="day-content-${d.day}">
+        <!-- Теория -->
+        <div class="mb-5">
+            <div class="uppercase tracking-widest text-xs font-medium text-slate-400 mb-2">ГДЕ УЧИТЬ ТЕОРИЮ</div>
+${d.theoryResources.map(r => `
+                <a href="${r.url}" target="_blank" class="resource-link block text-sm py-0.5 text-blue-600 hover:underline">→ ${r.name}</a>
+            `).join('')}
+        </div>
+
+        <!-- Примеры кода -->
+${d.examples && d.examples.length > 0 ? `
+        <div class="mb-5">
+            <div class="uppercase tracking-widest text-xs font-medium text-slate-400 mb-2">ПРИМЕРЫ КОДА</div>
+${d.examples.map(ex => `
+                <div class="bg-slate-900 text-slate-200 text-xs p-3 rounded-2xl mb-2">
+                    <div class="flex justify-between mb-1">
+                        <span class="text-emerald-400">${ex.title}</span>
+                        <button onclick="copyToClipboard(this)" class="text-xs px-2 py-0.5 bg-slate-800 rounded hover:bg-slate-700">Копировать</button>
                     </div>
+                    <pre class="overflow-x-auto"><code>${ex.code}</code></pre>
+                </div>
+            `).join('')}
+        </div>` : ''}
 
-                    <div class="hidden px-6 py-6 bg-slate-50" id="day-content-${d.day}">
-                        <!-- Theory -->
-                        <div class="mb-5">
-                            <div class="uppercase tracking-widest text-xs font-medium text-slate-400 mb-2">ГДЕ УЧИТЬ ТЕОРИЮ</div>
-                            ${d.theoryResources.length > 0 ? 
-                                d.theoryResources.map(r => `
-                                    <a href="${r.url}" target="_blank" class="resource-link block text-sm py-0.5 text-blue-600 hover:underline">
-                                        → ${r.name}
-                                    </a>
-                                `).join('') : 
-                                '<span class="text-sm text-slate-500">Повторение + подготовка к экзамену</span>'
-                            }
-                        </div>
-
-                        <!-- Practice -->
+        <!-- Задачи -->
+        <div class="mb-6">
+            <div class="uppercase tracking-widest text-xs font-medium text-slate-400 mb-2">ЗАДАНИЯ ДЛЯ ПРАКТИКИ</div>
+            <div class="space-y-1">
+${d.practiceTasks.map((task, i) => {
+const checked = localStorage.getItem(`task-${d.day}-${i}`) === 'true';
+return `
+                    <label class="task-item flex items-start gap-x-3 px-3 py-2 rounded-2xl hover:bg-white cursor-pointer ${checked ? 'completed' : ''}">
+                        <input type="checkbox" class="mt-1 accent-emerald-600" ${checked ? 'checked' : ''}
+                               onchange="toggleTask(${d.day}, ${i}, this)">
                         <div>
-                            <div class="flex items-center justify-between mb-2">
-                                <div class="uppercase tracking-widest text-xs font-medium text-slate-400">ЗАДАНИЯ ДЛЯ ПРАКТИКИ</div>
-                                <div class="text-xs px-3 py-0.5 bg-white border rounded-full">${d.recommended} задач</div>
-                            </div>
-                            
-                            <div class="space-y-1 text-sm">
-                                ${d.practiceTasks.map((task, i) => `
-                                    <div class="task-item flex items-start gap-x-3 px-3 py-2 rounded-2xl hover:bg-white border border-transparent hover:border-slate-200">
-                                        <div class="mt-0.5 text-emerald-500"><i class="fa-solid fa-check-circle"></i></div>
-                                        <div>${task}</div>
-                                    </div>
-                                `).join('')}
-                            </div>
+                            <span class="${checked ? 'line-through text-slate-400' : ''}">${task.text}</span>
+                            <span class="ml-2">${getDifficultyStars(task.difficulty)}</span>
                         </div>
+                    </label>`;
+                }).join('')}
+            </div>
+        </div>
 
-                        <div class="mt-5 pt-4 border-t flex justify-between items-center text-xs">
-                            <button onclick="markDayDone(${d.day}); event.stopImmediatePropagation()" 
-                                    class="px-4 py-2 bg-emerald-600 hover:bg-emerald-700 transition text-white text-xs font-medium rounded-2xl flex items-center gap-x-2">
-                                <i class="fa-solid fa-check-double"></i>
-                                <span>Отметить день выполненным</span>
-                            </button>
-                            <span class="text-slate-400">Рекомендуется: 2–3.5 часа</span>
-                        </div>
-                    </div>
-                </div>`;
-                
-                container.innerHTML += html;
-            });
-            
-            updateProgress();
-        }
+        <!-- Самооценка -->
+        <div class="pt-4 border-t">
+            <div class="uppercase tracking-widest text-xs font-medium text-slate-400 mb-2">Насколько хорошо понял тему?</div>
+            <div class="flex items-center gap-x-1">
+                ${confidenceHTML}
+                <span class="ml-3 text-sm text-slate-500" id="confidence-label-${d.day}">
+                    ${confidence ? confidence + '/5' : 'Оцени тему'}
+                </span>
+            </div>
+        </div>
+    </div>
+</div>`;
+container.innerHTML += html;
+});
+updateProgress();
+updateStreak();
+updateReviewSection();
+}
 
-        function toggleDay(dayNum) {
-            const content = document.getElementById(`day-content-${dayNum}`);
-            if (content) content.classList.toggle('hidden');
-        }
+// ==================== ЛОГИКА ====================
+function toggleTask(day, index, checkbox) {
+localStorage.setItem(`task-${day}-${index}`, checkbox.checked);
+const container = document.getElementById('days-container');
+container.innerHTML = '';
+renderDays();
+}
 
-        function toggleComplete(dayNum, element) {
-            event.stopImmediatePropagation();
-            const isDone = localStorage.getItem(`day-${dayNum}`) === 'true';
-            localStorage.setItem(`day-${dayNum}`, !isDone);
-            
-            // re-render to update styles
-            const container = document.getElementById('days-container');
-            container.innerHTML = '';
-            renderDays();
-        }
+function setConfidence(day, value, element) {
+localStorage.setItem(`confidence-${day}`, value);
 
-        function markDayDone(dayNum) {
-            localStorage.setItem(`day-${dayNum}`, 'true');
-            const container = document.getElementById('days-container');
-            container.innerHTML = '';
-            renderDays();
-        }
+const container = element.parentElement;
+container.querySelectorAll('button').forEach((btn, idx) => {
+if (idx < value) {
+btn.classList.add('text-yellow-400');
+btn.classList.remove('text-slate-300');
+} else {
+btn.classList.remove('text-yellow-400');
+btn.classList.add('text-slate-300');
+}
+});
 
-        function updateProgress() {
-            let done = 0;
-            for (let i = 1; i <= 12; i++) {
-                if (localStorage.getItem(`day-${i}`) === 'true') done++;
-            }
-            const el = document.getElementById('progress-text');
-            if (el) el.innerText = done;
-        }
+const label = document.getElementById(`confidence-label-${day}`);
+if (label) label.textContent = `${value}/5`;
 
-        function resetAllProgress() {
-            if (confirm('Сбросить весь прогресс?')) {
-                for (let i = 1; i <= 12; i++) localStorage.removeItem(`day-${i}`);
-                const container = document.getElementById('days-container');
-                container.innerHTML = '';
-                renderDays();
-            }
-        }
+updateReviewSection();
+}
 
-        function showSection(section) {
-            ['overview', 'daily', 'resources', 'tips'].forEach(s => {
-                document.getElementById('section-' + s).classList.add('hidden');
-            });
-            document.getElementById('section-' + section).classList.remove('hidden');
-            
-            document.querySelectorAll('.nav-tab').forEach(el => el.classList.remove('nav-active'));
-            document.getElementById('nav-' + section).classList.add('nav-active');
+function toggleDay(dayNum) {
+const el = document.getElementById(`day-content-${dayNum}`);
+if (el) el.classList.toggle('hidden');
+}
 
-            if (section === 'daily') {
-                const container = document.getElementById('days-container');
-                if (container.children.length === 0) renderDays();
-            }
-        }
+function toggleDayDone(dayNum) {
+event.stopImmediatePropagation();
+const key = `day-${dayNum}`;
+localStorage.setItem(key, localStorage.getItem(key) === 'true' ? 'false' : 'true');
+const container = document.getElementById('days-container');
+container.innerHTML = '';
+renderDays();
+}
 
-        function init() {
-            // Show overview first
-            document.getElementById('section-overview').classList.remove('hidden');
-            document.getElementById('nav-overview').classList.add('nav-active');
-            
-            // Render days in background
-            setTimeout(() => {
-                const container = document.getElementById('days-container');
-                if (container) renderDays();
-            }, 300);
-        }
+function updateProgress() {
+let done = 0;
+for (let i = 1; i <= 12; i++) {
+if (localStorage.getItem(`day-${i}`) === 'true') done++;
+}
+document.getElementById('progress-text').innerText = done;
+}
 
-        window.onload = init;
-    </script>
+function calculateStreak() {
+let streak = 0;
+for (let i = 1; i <= 12; i++) {
+if (localStorage.getItem(`day-${i}`) === 'true') {
+streak++;
+} else {
+break;
+}
+}
+return streak;
+}
+function updateStreak() {
+document.getElementById('streak-text').innerText = calculateStreak();
+}
+
+function resetAllProgress() {
+if (!confirm('Сбросить весь прогресс и оценки?')) return;
+for (let i = 1; i <= 12; i++) {
+localStorage.removeItem(`day-${i}`);
+localStorage.removeItem(`confidence-${i}`);
+days.find(d => d.day === i)?.practiceTasks.forEach((_, idx) => {
+localStorage.removeItem(`task-${i}-${idx}`);
+});
+}
+document.getElementById('days-container').innerHTML = '';
+renderDays();
+}
+
+// ==================== ПОВТОРЕНИЕ ====================
+function updateReviewSection() {
+const container = document.getElementById('review-container');
+if (!container) return;
+
+let html = '';
+let hasItems = false;
+
+for (let i = 1; i <= 12; i++) {
+const confidence = parseInt(localStorage.getItem(`confidence-${i}`) || '0');
+const dayDone = localStorage.getItem(`day-${i}`) === 'true';
+const dayData = days.find(d => d.day === i);
+if (!dayData) continue;
+
+const incompleteTasks = dayData.practiceTasks.length - 
+(Array.from({length: dayData.practiceTasks.length}, (_, idx) => 
+localStorage.getItem(`task-${i}-${idx}`) === 'true').filter(Boolean).length);
+
+if (confidence > 0 && confidence < 4 || (!dayDone && incompleteTasks > 0)) {
+hasItems = true;
+html += `
+<div onclick="showSection('daily'); setTimeout(() => { document.getElementById('day-content-${i}').classList.remove('hidden'); document.getElementById('day-card-${i}').scrollIntoView({behavior:'smooth'}) }, 100)"
+class="bg-white border rounded-3xl p-5 flex justify-between items-center cursor-pointer hover:border-blue-300">
+<div>
+<div class="font-medium">День ${i}: ${dayData.title}</div>
+<div class="text-sm text-slate-500">
+${confidence > 0 ? `Самооценка: ${confidence}/5` : 'Не оценено'}
+${incompleteTasks > 0 ? ` • ${incompleteTasks} задач осталось` : ''}
+</div>
+</div>
+<div class="text-blue-500">
+<i class="fa-solid fa-arrow-right"></i>
+</div>
+</div>`;
+}
+}
+
+if (!hasItems) {
+html = `<div class="bg-white border rounded-3xl p-8 text-center">
+<i class="fa-solid fa-check-circle text-4xl text-emerald-500 mb-3"></i>
+<p class="text-lg font-medium">Отлично! Нет тем, требующих повторения.</p>
+<p class="text-sm text-slate-500 mt-1">Продолжай в том же духе.</p>
+</div>`;
+}
+
+container.innerHTML = html;
+}
+
+// ==================== PYTHON PLAYGROUND (Pyodide) ====================
+let pyodideInstance = null;
+let isPyodideLoading = false;
+
+async function initPyodide() {
+if (pyodideInstance) return pyodideInstance;
+if (isPyodideLoading) return;
+
+isPyodideLoading = true;
+const output = document.getElementById('python-output');
+output.innerHTML = 'Загрузка Pyodide... (первый раз ~10-15 сек)';
+
+try {
+const script = document.createElement('script');
+script.src = 'https://cdn.jsdelivr.net/pyodide/v0.29.4/full/pyodide.js';
+document.head.appendChild(script);
+
+await new Promise((resolve, reject) => {
+script.onload = resolve;
+script.onerror = reject;
+});
+
+pyodideInstance = await loadPyodide();
+output.innerHTML = 'Pyodide загружен. Готов к работе!\n';
+return pyodideInstance;
+} catch (e) {
+output.innerHTML = 'Ошибка загрузки Pyodide. Проверьте интернет.';
+console.error(e);
+} finally {
+isPyodideLoading = false;
+}
+}
+
+async function runPythonCode() {
+const codeEl = document.getElementById('python-code');
+const outputEl = document.getElementById('python-output');
+const code = codeEl.value.trim();
+
+if (!code) {
+outputEl.innerHTML = 'Введите код для выполнения.';
+return;
+}
+
+outputEl.innerHTML = 'Выполнение...';
+
+try {
+const pyodide = await initPyodide();
+if (!pyodide) {
+outputEl.innerHTML = 'Pyodide не загружен.';
+return;
+}
+
+let output = '';
+pyodide.setStdout({
+batched: (s) => { output += s + '\n'; }
+});
+
+await pyodide.runPythonAsync(code);
+outputEl.innerHTML = output || '(нет вывода)';
+} catch (err) {
+outputEl.innerHTML = 'Ошибка:\n' + err.message;
+}
+}
+
+function clearOutput() {
+document.getElementById('python-output').innerHTML = '';
+}
+
+function loadExample(exampleIndex) {
+const examples = [
+'print("Hello, Олексій!")\nprint("Добро пожаловать в песочницу")',
+'a = float(input("Первое число: "))\nb = float(input("Второе число: "))\nprint("Сумма:", a + b)\nprint("Произведение:", a * b)',
+'numbers = [3, 7, 1, 9, 4]\nprint("Максимум:", max(numbers))\nfor num in numbers:\n    if num % 2 == 0:\n        print(num, "чётное")',
+'def greet(name):\n    return f"Привет, {name}!"\n\nstudent = {"name": "Олексій", "age": 25}\nprint(greet(student["name"]))\nprint("Возраст:", student.get("age"))'
+];
+document.getElementById('python-code').value = examples[exampleIndex] || '';
+}
+
+function openPythonPlayground() {
+document.getElementById('playground-modal').classList.remove('hidden');
+document.getElementById('playground-modal').classList.add('flex');
+
+setTimeout(() => {
+document.getElementById('python-code').focus();
+}, 300);
+}
+
+function closePlayground() {
+document.getElementById('playground-modal').classList.remove('flex');
+document.getElementById('playground-modal').classList.add('hidden');
+}
+
+// ==================== ПРОЕКТЫ ====================
+const projects = [
+{
+title: "Умный калькулятор с историей",
+code: `history = []
+
+while True:
+    print("\\n1. Сложить  2. Вычесть  3. Умножить  4. Разделить  5. История  0. Выход")
+    choice = input("Выберите: ")
+    if choice == "0": break
+    if choice == "5":
+        print("История операций:")
+        for item in history: print(item)
+        continue
+    
+    a = float(input("Первое число: "))
+    b = float(input("Второе число: "))
+    
+    if choice == "1": res = a + b; op = "+"
+    elif choice == "2": res = a - b; op = "-"
+    elif choice == "3": res = a * b; op = "*"
+    elif choice == "4": res = a / b if b != 0 else "Ошибка"; op = "/"
+    else: continue
+    
+    result_str = f"{a} {op} {b} = {res}"
+    print(result_str)
+    history.append(result_str)`
+},
+{
+title: "Игра «Угадай число»",
+code: `import random
+
+secret = random.randint(1, 100)
+attempts = 0
+max_attempts = 7
+
+print("Я загадал число от 1 до 100. У тебя 7 попыток!")
+
+while attempts < max_attempts:
+    guess = int(input("Твоё число: "))
+    attempts += 1
+    
+    if guess == secret:
+        print(f"Поздравляю! Ты угадал за {attempts} попыток!")
+        break
+    elif guess < secret:
+        print("Больше ↑")
+    else:
+        print("Меньше ↓")
+else:
+    print(f"Ты проиграл. Я загадал {secret}")`
+},
+{
+title: "Анализатор текста",
+code: `text = input("Введите текст: ")
+
+words = text.split()
+print(f"Количество слов: {len(words)}")
+
+char_count = {}
+for char in text.lower():
+    if char.isalpha():
+        char_count[char] = char_count.get(char, 0) + 1
+
+print("Частота букв:")
+for char, count in sorted(char_count.items()):
+    print(f"  {char}: {count}")
+
+clean = ''.join(c.lower() for c in text if c.isalnum())
+is_pal = clean == clean[::-1]
+print(f"Это палиндром? {'Да' if is_pal else 'Нет'}")`
+},
+{
+title: "Менеджер студентов (OOP)",
+code: `class Student:
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
+        self.grades = []
+    
+    def add_grade(self, grade):
+        self.grades.append(grade)
+    
+    def average(self):
+        return sum(self.grades) / len(self.grades) if self.grades else 0
+    
+    def __str__(self):
+        return f"{self.name}, {self.age} лет, средний балл: {self.average():.1f}"
+
+students = []
+
+while True:
+    print("\\n1. Добавить студента  2. Показать всех  3. Выход")
+    choice = input("Выберите: ")
+    if choice == "3": break
+    
+    if choice == "1":
+        name = input("Имя: ")
+        age = int(input("Возраст: "))
+        s = Student(name, age)
+        for _ in range(3):
+            g = int(input("Оценка: "))
+            s.add_grade(g)
+        students.append(s)
+        print("Студент добавлен!")
+    
+    elif choice == "2":
+        for s in students:
+            print(s)`
+}
+];
+
+function openProjectInPlayground(projectIndex) {
+const project = projects[projectIndex];
+if (!project) return;
+
+openPythonPlayground();
+
+setTimeout(() => {
+const codeArea = document.getElementById('python-code');
+if (codeArea) {
+codeArea.value = project.code;
+}
+}, 400);
+}
+
+// ==================== ВСПОМОГАТЕЛЬНОЕ ====================
+function showSection(section) {
+['overview', 'daily', 'projects', 'review', 'resources', 'tips'].forEach(s => {
+const el = document.getElementById('section-' + s);
+if (el) el.classList.add('hidden');
+});
+
+const target = document.getElementById('section-' + section);
+if (target) target.classList.remove('hidden');
+
+document.querySelectorAll('.nav-tab').forEach(el => el.classList.remove('nav-active'));
+const navEl = document.getElementById('nav-' + section);
+if (navEl) navEl.classList.add('nav-active');
+
+if (section === 'daily' && document.getElementById('days-container').children.length === 0) {
+renderDays();
+}
+if (section === 'review') {
+updateReviewSection();
+}
+}
+
+function copyToClipboard(btn) {
+const code = btn.parentElement.nextElementSibling.innerText;
+navigator.clipboard.writeText(code).then(() => {
+const original = btn.innerText;
+btn.innerText = 'Скопировано!';
+setTimeout(() => btn.innerText = original, 1500);
+});
+}
+
+// ==================== LIVE COUNTDOWN ====================
+function updateCountdown() {
+const examDate = new Date('2026-06-08T00:00:00');
+const now = new Date();
+const diff = examDate - now;
+const el = document.getElementById('countdown');
+if (!el) return;
+
+if (diff <= 0) {
+el.innerText = 'Экзамен прошёл';
+return;
+}
+const daysLeft = Math.floor(diff / (1000 * 60 * 60 * 24));
+const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+el.innerHTML = `${daysLeft}д ${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+}
+
+// ==================== ИНИЦИАЛИЗАЦИЯ ====================
+function init() {
+document.getElementById('section-overview').classList.remove('hidden');
+document.getElementById('nav-overview').classList.add('nav-active');
+
+updateUserInfoDisplay();
+initTheme();
+
+// Live countdown
+updateCountdown();
+setInterval(updateCountdown, 1000);
+
+// Initial render
+setTimeout(() => {
+const container = document.getElementById('days-container');
+if (container) renderDays();
+}, 300);
+
+// Keyboard support
+document.addEventListener('keydown', function(e) {
+if (e.key === "Escape") {
+const modal = document.getElementById('playground-modal');
+if (!modal.classList.contains('hidden')) {
+closePlayground();
+}
+}
+if ((e.ctrlKey || e.metaKey) && e.key === "Enter") {
+const modal = document.getElementById('playground-modal');
+if (!modal.classList.contains('hidden')) {
+e.preventDefault();
+runPythonCode();
+}
+}
+});
+}
+
+window.onload = init;
+</script>
 </body>
 </html>
