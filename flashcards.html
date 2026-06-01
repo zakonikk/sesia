@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Flashcards • Python</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg: #0f0f12;
+  --surface: #18181b;
+  --surface2: #27272a;
+  --border: #3f3f46;
+  --text: #f4f4f5;
+  --muted: #71717a;
+  --accent: #6366f1;
+  --know: #22c55e;
+  --dontknow: #ef4444;
+  --radius: 12px;
+}
+html.light {
+  --bg: #f8f8fa;
+  --surface: #ffffff;
+  --surface2: #f1f1f4;
+  --border: #e4e4e7;
+  --text: #18181b;
+  --muted: #71717a;
+  --accent: #4f46e5;
+}
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Inter', system_ui, sans-serif;
+  min-height: 100vh;
+}
+header {
+  padding: 1rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--border);
+}
+.logo {
+  font-weight: 600;
+  font-size: 1.1rem;
+  letter-spacing: -0.02em;
+}
+.header-right {
+  display: flex;
+  gap: 8px;
+}
+.btn-icon {
+  width: 36px; height: 36px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  border-radius: 8px;
+  color: var(--muted);
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 15px;
+  transition: all 0.2s;
+}
+.btn-icon:hover { border-color: var(--accent); color: var(--accent); }
+
+main { max-width: 720px; margin: 0 auto; padding: 2rem 1rem; }
+
+.topics-row {
+  display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 1.5rem;
+}
+.topic-pill {
+  padding: 5px 14px;
+  border-radius: 9999px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--muted);
+  font-size: 13px; font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.topic-pill.active {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: white;
+}
+.topic-pill .count {
+  font-size: 11px; opacity: 0.7; margin-left: 4px;
+}
+
+.stats-bar {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  margin-bottom: 1.5rem;
+}
+.stat-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 10px 12px;
+  text-align: center;
+}
+.stat-num { font-size: 1.35rem; font-weight: 600; line-height: 1; }
+.stat-label { font-size: 11px; color: var(--muted); margin-top: 2px; }
+
+.progress-wrap {
+  height: 4px;
+  background: var(--border);
+  border-radius: 9999px;
+  margin-bottom: 2rem;
+  overflow: hidden;
+}
+.progress-fill {
+  height: 100%;
+  background: var(--accent);
+  transition: width 0.3s ease;
+}
+
+.card-scene {
+  perspective: 1000px;
+  width: 100%;
+  max-width: 620px;
+  height: 320px;
+  margin: 0 auto 1.5rem;
+}
+.card-3d {
+  width: 100%; height: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+}
+.card-3d.flipped { transform: rotateY(180deg); }
+.card-face {
+  position: absolute; inset: 0;
+  border-radius: var(--radius);
+  backface-visibility: hidden;
+  display: flex;
+  flex-direction: column;
+  padding: 2rem 1.75rem;
+  border: 1px solid var(--border);
+  background: var(--surface);
+}
+.card-back {
+  background: var(--surface2);
+  transform: rotateY(180deg);
+}
+.card-tag {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 1rem;
+}
+.card-question {
+  font-size: 1.15rem;
+  font-weight: 500;
+  line-height: 1.45;
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+.card-answer {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--text);
+}
+.card-answer code, .card-answer pre {
+  font-family: 'JetBrains Mono', monospace;
+  background: #111113;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 2px 6px;
+  font-size: 0.85rem;
+}
+.card-answer pre {
+  padding: 12px;
+  margin-top: 10px;
+  white-space: pre-wrap;
+}
+.card-counter {
+  font-size: 12px;
+  color: var(--muted);
+  margin-top: auto;
+  align-self: flex-end;
+}
+
+.action-row {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 1.5rem;
+}
+.btn-action {
+  padding: 12px 28px;
+  border-radius: 10px;
+  border: 1.5px solid;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.btn-dontknow {
+  background: transparent;
+  border-color: #ef4444;
+  color: #ef4444;
+}
+.btn-dontknow:hover { background: #ef4444; color: white; }
+.btn-know {
+  background: transparent;
+  border-color: #22c55e;
+  color: #22c55e;
+}
+.btn-know:hover { background: #22c55e; color: white; }
+.btn-skip {
+  width: 44px; height: 44px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--muted);
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.finish-screen {
+  display: none;
+  text-align: center;
+  padding: 2.5rem 1.5rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+.finish-emoji { font-size: 2.5rem; margin-bottom: 0.75rem; }
+.finish-title { font-size: 1.35rem; font-weight: 600; margin-bottom: 0.5rem; }
+.finish-sub { color: var(--muted); margin-bottom: 1.5rem; }
+
+.bottom-controls {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.btn-secondary {
+  padding: 9px 18px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
+  font-size: 13px;
+  cursor: pointer;
+}
+.btn-primary {
+  padding: 9px 18px;
+  border-radius: 8px;
+  background: var(--accent);
+  color: white;
+  font-size: 13px;
+  border: none;
+  cursor: pointer;
+}
+
+.kb-hint {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 1rem;
+  font-size: 12px;
+  color: var(--muted);
+}
+.kb-key {
+  border: 1px solid var(--border);
+  padding: 1px 6px;
+  border-radius: 4px;
+  font-size: 11px;
+}
+
+@media (max-width: 640px) {
+  .card-scene { height: 280px; }
+  .card-question { font-size: 1.05rem; }
+  .stats-bar { grid-template-columns: repeat(2, 1fr); }
+}
+</style>
+</head>
+<body>
+<header>
+  <div class="logo">Flashcards • Python</div>
+  <div class="header-right">
+    <button class="btn-icon" onclick="toggleShuffle()" title="Перемішати">↻</button>
+    <button class="btn-icon" onclick="toggleTheme()" title="Тема">☼</button>
+  </div>
+</header>
+
+<main>
+  <div class="topics-row" id="topics-row"></div>
+
+  <div class="stats-bar">
+    <div class="stat-card"><div class="stat-num" id="stat-total">0</div><div class="stat-label">всього</div></div>
+    <div class="stat-card"><div class="stat-num" id="stat-know">0</div><div class="stat-label">знаю</div></div>
+    <div class="stat-card"><div class="stat-num" id="stat-dontknow">0</div><div class="stat-label">не знаю</div></div>
+    <div class="stat-card"><div class="stat-num" id="stat-pct">0%</div><div class="stat-label">засвоєно</div></div>
+  </div>
+
+  <div class="progress-wrap"><div class="progress-fill" id="progress-fill" style="width:0%"></div></div>
+
+  <div class="card-scene" id="card-scene">
+    <div class="card-3d" id="card-3d" onclick="flipCard()">
+      <div class="card-face card-front">
+        <div class="card-tag" id="card-tag">Тема</div>
+        <div class="card-question" id="card-question"></div>
+        <div class="card-counter" id="card-counter"></div>
+      </div>
+      <div class="card-face card-back">
+        <div class="card-tag" id="card-tag-back">Тема</div>
+        <div class="card-answer" id="card-answer"></div>
+        <div class="card-counter" id="card-counter-back"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="finish-screen" id="finish-screen">
+    <div class="finish-emoji" id="finish-emoji">🎉</div>
+    <div class="finish-title" id="finish-title">Колоду пройдено!</div>
+    <div class="finish-sub" id="finish-sub"></div>
+    <div class="bottom-controls">
+      <button class="btn-secondary" onclick="repeatWrong()">Повторити незнайомі</button>
+      <button class="btn-primary" onclick="restartDeck()">Почати спочатку</button>
+    </div>
+  </div>
+
+  <div class="action-row" id="action-row">
+    <button class="btn-action btn-dontknow" onclick="answer(false)">Не знаю</button>
+    <button class="btn-skip" onclick="nextCard()">→</button>
+    <button class="btn-action btn-know" onclick="answer(true)">Знаю</button>
+  </div>
+
+  <div class="kb-hint">
+    <span><span class="kb-key">Space</span> перевернути</span>
+    <span><span class="kb-key">←</span> не знаю</span>
+    <span><span class="kb-key">→</span> знаю</span>
+  </div>
+</main>
+
+<script>
+const allCards = [
+  // ── ЗМІННІ ──
+  { topic: 'Змінні', q: 'Що таке змінна в Python?', a: 'Іменована область пам\'яті, що зберігає значення. Тип визначається автоматично.' },
+  { topic: 'Змінні', q: 'Які основні типи даних у Python?', a: '<code>int</code> — ціле число<br><code>float</code> — дробове<br><code>str</code> — рядок<br><code>bool</code> — True/False' },
+  { topic: 'Змінні', q: 'Що повертає функція type()?', a: 'Тип об\'єкта. Наприклад: <code>type(42)</code> → <code>&lt;class \'int\'&gt;</code>' },
+  { topic: 'Змінні', q: 'Що завжди повертає input()?', a: 'Завжди рядок (<code>str</code>). Для числа потрібно перетворити: <code>int(input())</code>' },
+  { topic: 'Змінні', q: 'Як поміняти місцями значення двох змінних?', a: '<pre>a, b = b, a</pre>' },
+  { topic: 'Змінні', q: 'Чим відрізняється = від == ?', a: '<code>=</code> — присвоєння значення<br><code>==</code> — порівняння (повертає True/False)' },
+
+  // ── ОПЕРАТОРИ ──
+  { topic: 'Оператори', q: 'Що робить оператор // ?', a: 'Цілочисельне ділення: <code>17 // 5 = 3</code>' },
+  { topic: 'Оператори', q: 'Що робить оператор % ?', a: 'Залишок від ділення: <code>17 % 5 = 2</code>' },
+  { topic: 'Оператори', q: 'Що робить оператор ** ?', a: 'Зведення до степеня: <code>2 ** 10 = 1024</code>' },
+  { topic: 'Оператори', q: 'Які логічні оператори є в Python?', a: '<code>and</code> — І<br><code>or</code> — АБО<br><code>not</code> — НЕ' },
+  { topic: 'Оператори', q: 'Як перевірити парність числа?', a: '<code>n % 2 == 0</code> — True, якщо парне' },
+
+  // ── УМОВИ ──
+  { topic: 'Умови', q: 'Синтаксис if-elif-else', a: '<pre>if умова:\n    код\nelif умова2:\n    код\nelse:\n    код</pre>' },
+  { topic: 'Умови', q: 'Що таке тернарний оператор?', a: '<code>значення_if_true if умова else значення_if_false</code>' },
+  { topic: 'Умови', q: 'Як перевірити високосний рік?', a: '<pre>if (y % 4 == 0 and y % 100 != 0) or y % 400 == 0:</pre>' },
+  { topic: 'Умови', q: 'Що виведе if 0: ... else: ... ?', a: 'Виведе else, бо 0 вважається False' },
+
+  // ── ЦИКЛИ ──
+  { topic: 'Цикли', q: 'Різниця між for і while', a: '<code>for</code> — по послідовності<br><code>while</code> — поки умова True' },
+  { topic: 'Цикли', q: 'Що повертає range(1, 6)?', a: 'Числа 1, 2, 3, 4, 5 (верхня межа не включається)' },
+  { topic: 'Цикли', q: 'Що робить break?', a: 'Повністю зупиняє цикл' },
+  { topic: 'Цикли', q: 'Що робить continue?', a: 'Пропускає поточну ітерацію' },
+  { topic: 'Цикли', q: 'Вивести числа від 10 до 1 у зворотному порядку', a: '<pre>for i in range(10, 0, -1): print(i)</pre>' },
+
+  // ── ФУНКЦІЇ ──
+  { topic: 'Функції', q: 'Синтаксис функції', a: '<pre>def назва(параметри):\n    """Docstring"""\n    return результат</pre>' },
+  { topic: 'Функції', q: 'Що таке return?', a: 'Повертає значення і завершує роботу функції. Без return → None' },
+  { topic: 'Функції', q: 'Що таке параметр за замовчуванням?', a: '<code>def greet(name="Гість"):</code> — якщо не передати аргумент, використається "Гість"' },
+  { topic: 'Функції', q: 'Чи може функція повертати кілька значень?', a: 'Так. <code>return a, b</code> повертає кортеж' },
+
+  // ── РЕКУРСІЯ ──
+  { topic: 'Рекурсія', q: 'Що таке рекурсія?', a: 'Коли функція викликає саму себе. Потрібен базовий випадок.' },
+  { topic: 'Рекурсія', q: 'Що буде без базового випадку?', a: 'Нескінченна рекурсія → RecursionError' },
+  { topic: 'Рекурсія', q: 'Рекурсивний факторіал', a: '<pre>def factorial(n):\n    if n <= 1: return 1\n    return n * factorial(n-1)</pre>' },
+
+  // ── СПИСКИ ──
+  { topic: 'Списки', q: 'Як додати елемент у список?', a: '<code>lst.append(x)</code> — в кінець<br><code>lst.insert(i, x)</code> — за індексом' },
+  { topic: 'Списки', q: 'Як видалити елемент?', a: '<code>lst.remove(x)</code> — за значенням<br><code>lst.pop(i)</code> — за індексом' },
+  { topic: 'Списки', q: 'Що таке slice?', a: '<code>lst[1:4]</code> — з 1 по 3<br><code>lst[::-1]</code> — реверс' },
+  { topic: 'Списки', q: 'Що таке list comprehension?', a: '<pre>[x**2 for x in range(10)]</pre>' },
+  { topic: 'Списки', q: 'Як відсортувати список?', a: '<code>lst.sort()</code> — змінює на місці<br><code>sorted(lst)</code> — повертає новий' },
+
+  // ── СЛОВНИКИ ──
+  { topic: 'Словники', q: 'Що таке dict?', a: 'Колекція пар ключ-значення. Ключі унікальні.' },
+  { topic: 'Словники', q: 'Як безпечно отримати значення?', a: '<code>d.get("key", default)</code> — не викликає помилку' },
+  { topic: 'Словники', q: 'Що таке set?', a: 'Колекція унікальних елементів без порядку.' },
+  { topic: 'Словники', q: 'Як перевірити паліндром?', a: '<pre>s == s[::-1]</pre>' },
+
+  // ── ФАЙЛИ ──
+  { topic: 'Файли', q: 'Як відкрити файл?', a: '<pre>with open("file.txt") as f:\n    content = f.read()</pre>' },
+  { topic: 'Файли', q: 'Режими відкриття файлів', a: '<code>"r"</code> — читання, <code>"w"</code> — запис, <code>"a"</code> — дозапис' },
+  { topic: 'Файли', q: 'Читати файл рядок за рядком', a: '<pre>for line in open("file.txt"):\n    print(line.strip())</pre>' },
+
+  // ── ООП ──
+  { topic: 'ООП', q: 'Що таке клас?', a: 'Шаблон для створення об\'єктів.' },
+  { topic: 'ООП', q: 'Що таке __init__?', a: 'Конструктор класу (викликається при створенні об\'єкта)' },
+  { topic: 'ООП', q: 'Що таке self?', a: 'Посилання на поточний об\'єкт (перший параметр методів)' },
+  { topic: 'ООП', q: 'Приклад простого класу', a: '<pre>class Student:\n    def __init__(self, name):\n        self.name = name</pre>' },
+
+  // ── АЛГОРИТМИ ──
+  { topic: 'Алгоритми', q: 'Як працює Bubble Sort?', a: 'Порівнює сусідні елементи і міняє їх місцями. O(n²)' },
+  { topic: 'Алгоритми', q: 'Що таке Big O?', a: 'Оцінка складності алгоритму за часом і пам\'яттю.' },
+];
+
+const TOPICS = ['Всі', ...new Set(allCards.map(c => c.topic))];
+
+let activeTopic = 'Всі';
+let deck = [];
+let currentIdx = 0;
+let isFlipped = false;
+let knowCount = 0;
+let dontknowCount = 0;
+let shuffleOn = false;
+
+function getFilteredDeck() {
+  let cards = activeTopic === 'Всі' ? [...allCards] : allCards.filter(c => c.topic === activeTopic);
+  if (shuffleOn) cards.sort(() => Math.random() - 0.5);
+  return cards;
+}
+
+function initTopics() {
+  const row = document.getElementById('topics-row');
+  row.innerHTML = '';
+  TOPICS.forEach(t => {
+    const count = t === 'Всі' ? allCards.length : allCards.filter(c => c.topic === t).length;
+    const pill = document.createElement('button');
+    pill.className = 'topic-pill' + (t === activeTopic ? ' active' : '');
+    pill.innerHTML = `${t} <span class="count">${count}</span>`;
+    pill.onclick = () => {
+      activeTopic = t;
+      document.querySelectorAll('.topic-pill').forEach(p => p.classList.remove('active'));
+      pill.classList.add('active');
+      restartDeck();
+    };
+    row.appendChild(pill);
+  });
+}
+
+function restartDeck() {
+  deck = getFilteredDeck();
+  currentIdx = 0;
+  knowCount = 0;
+  dontknowCount = 0;
+  isFlipped = false;
+  document.getElementById('finish-screen').style.display = 'none';
+  document.getElementById('card-scene').style.display = 'block';
+  document.getElementById('action-row').style.display = 'flex';
+  updateStats();
+  renderCard();
+}
+
+function renderCard() {
+  if (currentIdx >= deck.length) {
+    showFinish();
+    return;
+  }
+  const card = deck[currentIdx];
+  document.getElementById('card-tag').textContent = card.topic;
+  document.getElementById('card-tag-back').textContent = card.topic;
+  document.getElementById('card-question').innerHTML = card.q;
+  document.getElementById('card-answer').innerHTML = card.a;
+  const counter = `${currentIdx + 1} / ${deck.length}`;
+  document.getElementById('card-counter').textContent = counter;
+  document.getElementById('card-counter-back').textContent = counter;
+
+  isFlipped = false;
+  document.getElementById('card-3d').classList.remove('flipped');
+  updateStats();
+}
+
+function flipCard() {
+  const el = document.getElementById('card-3d');
+  isFlipped = !isFlipped;
+  el.classList.toggle('flipped', isFlipped);
+}
+
+function answer(knew) {
+  if (knew) knowCount++; else dontknowCount++;
+  currentIdx++;
+  renderCard();
+}
+
+function nextCard() {
+  currentIdx++;
+  renderCard();
+}
+
+function updateStats() {
+  const total = deck.length;
+  const answered = knowCount + dontknowCount;
+  const pct = answered > 0 ? Math.round((knowCount / answered) * 100) : 0;
+  const progress = total > 0 ? (answered / total * 100) : 0;
+
+  document.getElementById('stat-total').textContent = total;
+  document.getElementById('stat-know').textContent = knowCount;
+  document.getElementById('stat-dontknow').textContent = dontknowCount;
+  document.getElementById('stat-pct').textContent = pct + '%';
+  document.getElementById('progress-fill').style.width = progress + '%';
+}
+
+function showFinish() {
+  document.getElementById('card-scene').style.display = 'none';
+  document.getElementById('action-row').style.display = 'none';
+  const total = knowCount + dontknowCount;
+  const pct = total > 0 ? Math.round((knowCount / total) * 100) : 0;
+  document.getElementById('finish-sub').textContent = `Правильно: ${knowCount} з ${total} (${pct}%)`;
+  document.getElementById('finish-screen').style.display = 'block';
+}
+
+function repeatWrong() {
+  if (dontknowCount === 0) {
+    restartDeck();
+    return;
+  }
+  deck = deck.slice(-dontknowCount);
+  currentIdx = 0;
+  knowCount = 0;
+  dontknowCount = 0;
+  document.getElementById('finish-screen').style.display = 'none';
+  document.getElementById('card-scene').style.display = 'block';
+  document.getElementById('action-row').style.display = 'flex';
+  renderCard();
+}
+
+function toggleShuffle() {
+  shuffleOn = !shuffleOn;
+  document.getElementById('btn-shuffle').style.opacity = shuffleOn ? '1' : '0.5';
+  restartDeck();
+}
+
+function toggleTheme() {
+  const isLight = document.documentElement.classList.toggle('light');
+  document.getElementById('btn-theme').textContent = isLight ? '☾' : '☼';
+  localStorage.setItem('fc-theme', isLight ? 'light' : 'dark');
+}
+
+document.addEventListener('keydown', e => {
+  if (e.key === ' ' || e.key === 'ArrowUp') { e.preventDefault(); flipCard(); }
+  else if (e.key === 'ArrowLeft') answer(false);
+  else if (e.key === 'ArrowRight') answer(true);
+  else if (e.key === 'ArrowDown') nextCard();
+});
+
+(function init() {
+  const saved = localStorage.getItem('fc-theme');
+  if (saved === 'light') {
+    document.documentElement.classList.add('light');
+    document.getElementById('btn-theme').textContent = '☾';
+  }
+  initTopics();
+  restartDeck();
+})();
+</script>
+</body>
+</html>
